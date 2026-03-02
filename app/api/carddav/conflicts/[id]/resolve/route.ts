@@ -14,7 +14,7 @@ const resolveSchema = z.object({
   resolution: z.enum(['keep_local', 'keep_remote', 'merged']),
 });
 
-export const POST = withLogging(async function POST(request: Request, context?: RouteContext) {
+export const POST = withLogging(async function POST(request: Request, context: RouteContext) {
   try {
     const session = await auth();
 
@@ -22,7 +22,7 @@ export const POST = withLogging(async function POST(request: Request, context?: 
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const { id } = await context!.params;
+    const { id } = await context.params;
     const validationResult = resolveSchema.safeParse(await request.json());
 
     if (!validationResult.success) {

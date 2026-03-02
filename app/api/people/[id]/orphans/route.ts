@@ -5,7 +5,7 @@ import { apiResponse, handleApiError, withAuth } from '@/lib/api-utils';
 // GET /api/people/[id]/orphans - Check which people would become orphans if this person is deleted
 export const GET = withAuth(async (_request, session, context) => {
   try {
-    const { id } = await context!.params;
+    const { id } = await context.params;
 
     // Fetch the person and all their relationships in one query
     const person = await prisma.person.findUnique({

@@ -11,7 +11,7 @@ import {
 
 export const GET = withAuth(async (_request, session, context) => {
   try {
-    const { id } = await context!.params;
+    const { id } = await context.params;
 
     // Fetch the person with all their relationships
     const person = await prisma.person.findUnique({

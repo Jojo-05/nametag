@@ -6,7 +6,7 @@ export const POST = withAuth(async (_request, session, context) => {
   const prismaWithDeleted = withDeleted();
 
   try {
-    const { id } = await context!.params;
+    const { id } = await context.params;
 
     // Find the soft-deleted group (using raw client to bypass soft-delete filter)
     const group = await prismaWithDeleted.group.findUnique({

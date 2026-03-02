@@ -5,7 +5,7 @@ import { apiResponse, handleApiError, parseRequestBody, withAuth } from '@/lib/a
 // GET /api/relationships/[id] - Get a single relationship
 export const GET = withAuth(async (_request, session, context) => {
   try {
-    const { id } = await context!.params;
+    const { id } = await context.params;
 
     const relationship = await prisma.relationship.findFirst({
       where: {
@@ -44,7 +44,7 @@ export const GET = withAuth(async (_request, session, context) => {
 // PUT /api/relationships/[id] - Update a relationship
 export const PUT = withAuth(async (request, session, context) => {
   try {
-    const { id } = await context!.params;
+    const { id } = await context.params;
     const body = await parseRequestBody(request);
     const validation = validateRequest(updateRelationshipSchema, body);
 
@@ -124,7 +124,7 @@ export const PUT = withAuth(async (request, session, context) => {
 // DELETE /api/relationships/[id] - Delete a relationship
 export const DELETE = withAuth(async (_request, session, context) => {
   try {
-    const { id } = await context!.params;
+    const { id } = await context.params;
 
     // Find the existing relationship
     const existing = await prisma.relationship.findUnique({

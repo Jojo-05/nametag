@@ -5,7 +5,7 @@ import { apiResponse, handleApiError, parseRequestBody, withAuth } from '@/lib/a
 // PUT /api/people/[id]/important-dates/[dateId] - Update an important date
 export const PUT = withAuth(async (request, session, context) => {
   try {
-    const { id, dateId } = await context!.params;
+    const { id, dateId } = await context.params;
     const body = await parseRequestBody(request);
     const validation = validateRequest(updateImportantDateSchema, body);
 
@@ -52,7 +52,7 @@ export const PUT = withAuth(async (request, session, context) => {
 // DELETE /api/people/[id]/important-dates/[dateId] - Delete an important date
 export const DELETE = withAuth(async (_request, session, context) => {
   try {
-    const { id, dateId } = await context!.params;
+    const { id, dateId } = await context.params;
 
     // Check if person exists and belongs to user
     const person = await prisma.person.findUnique({

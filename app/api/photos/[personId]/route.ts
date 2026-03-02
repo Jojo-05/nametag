@@ -3,16 +3,10 @@ import { prisma } from '@/lib/prisma';
 import { withAuth } from '@/lib/api-utils';
 import { isPhotoFilename, readPhotoFile } from '@/lib/photo-storage';
 
-interface RouteParams {
-  params: Promise<{
-    personId: string;
-  }>;
-}
-
 // GET /api/photos/[personId] - Serve a person's photo from disk
 export const GET = withAuth(async (_request, session, context) => {
   try {
-    const { personId } = await (context as RouteParams).params;
+    const { personId } = await context.params;
 
     // Get person and verify ownership
     const person = await prisma.person.findUnique({

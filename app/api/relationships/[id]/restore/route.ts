@@ -6,7 +6,7 @@ export const POST = withAuth(async (_request, session, context) => {
   const prismaWithDeleted = withDeleted();
 
   try {
-    const { id } = await context!.params;
+    const { id } = await context.params;
 
     // Find the soft-deleted relationship (using raw client to bypass soft-delete filter)
     const relationship = await prismaWithDeleted.relationship.findUnique({

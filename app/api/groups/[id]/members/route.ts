@@ -5,7 +5,7 @@ import { apiResponse, handleApiError, parseRequestBody, withAuth } from '@/lib/a
 // POST /api/groups/[id]/members - Add a member to a group
 export const POST = withAuth(async (request, session, context) => {
   try {
-    const { id } = await context!.params;
+    const { id } = await context.params;
     const body = await parseRequestBody(request);
     const validation = validateRequest(addGroupMemberSchema, body);
 

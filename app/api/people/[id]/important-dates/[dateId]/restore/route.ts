@@ -6,7 +6,7 @@ export const POST = withAuth(async (_request, session, context) => {
   const prismaWithDeleted = withDeleted();
 
   try {
-    const { id, dateId } = await context!.params;
+    const { id, dateId } = await context.params;
 
     // Check if person exists and belongs to user
     const person = await prismaWithDeleted.person.findUnique({

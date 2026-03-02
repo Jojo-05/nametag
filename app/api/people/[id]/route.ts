@@ -13,7 +13,7 @@ const log = createModuleLogger('people');
 // GET /api/people/[id] - Get a single person
 export const GET = withAuth(async (_request, session, context) => {
   try {
-    const { id } = await context!.params;
+    const { id } = await context.params;
 
     const person = await prisma.person.findUnique({
       where: {
@@ -64,7 +64,7 @@ export const GET = withAuth(async (_request, session, context) => {
 // PUT /api/people/[id] - Update a person
 export const PUT = withAuth(async (request, session, context) => {
   try {
-    const { id } = await context!.params;
+    const { id } = await context.params;
 
     const body = await parseRequestBody(request);
     const validation = validateRequest(updatePersonSchema, body);
@@ -390,7 +390,7 @@ export const PUT = withAuth(async (request, session, context) => {
 // DELETE /api/people/[id] - Delete a person
 export const DELETE = withAuth(async (request, session, context) => {
   try {
-    const { id } = await context!.params;
+    const { id } = await context.params;
 
     // Check if person exists and belongs to user
     const existingPerson = await prisma.person.findUnique({

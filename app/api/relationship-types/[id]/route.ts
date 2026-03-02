@@ -3,7 +3,7 @@ import { updateRelationshipTypeSchema, validateRequest } from '@/lib/validations
 import { apiResponse, handleApiError, parseRequestBody, withAuth } from '@/lib/api-utils';
 
 export const GET = withAuth(async (_request, session, context) => {
-  const { id } = await context!.params;
+  const { id } = await context.params;
 
   const relationshipType = await prisma.relationshipType.findFirst({
     where: {
@@ -30,7 +30,7 @@ export const GET = withAuth(async (_request, session, context) => {
 
 export const PUT = withAuth(async (request, session, context) => {
   try {
-    const { id } = await context!.params;
+    const { id } = await context.params;
 
     // Check if this type exists and belongs to the user
     const existing = await prisma.relationshipType.findFirst({
@@ -163,7 +163,7 @@ export const PUT = withAuth(async (request, session, context) => {
 
 export const DELETE = withAuth(async (_request, session, context) => {
   try {
-    const { id } = await context!.params;
+    const { id } = await context.params;
 
     // Check if this type exists and belongs to the user
     const existing = await prisma.relationshipType.findFirst({

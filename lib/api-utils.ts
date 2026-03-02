@@ -236,13 +236,16 @@ export interface RouteContext {
 }
 
 /**
- * Handler function type for authenticated API routes
+ * Handler function type for authenticated API routes.
+ * Context is always typed as required so that dynamic route handlers
+ * get proper type inference without non-null assertions.
+ * Handlers that don't need params can simply omit the third parameter.
  */
-export type AuthenticatedHandler<T = Response | NextResponse> = (
+export type AuthenticatedHandler = (
   request: Request,
   session: AuthenticatedSession,
-  context?: RouteContext
-) => Promise<T>;
+  context: RouteContext,
+) => Promise<Response | NextResponse>;
 
 /**
  * Higher-order function that wraps API handlers with request-level HTTP logging.
@@ -296,21 +299,19 @@ export function withLogging<
 }
 
 /**
- * Higher-order function that wraps API handlers with authentication
- * Automatically checks for valid session and returns 401 if not authenticated
+ * Higher-order function that wraps API handlers with authentication.
+ * Automatically checks for valid session and returns 401 if not authenticated.
  *
  * @example
- * // Simple usage
+ * // Without route params
  * export const GET = withAuth(async (request, session) => {
  *   const userId = session.user.id;
- *   // ... handler logic
  *   return NextResponse.json({ data });
  * });
  *
- * // With route params
+ * // With route params (context is required, no need for non-null assertion)
  * export const GET = withAuth(async (request, session, context) => {
- *   const { id } = await context!.params;
- *   // ... handler logic
+ *   const { id } = await context.params;
  *   return NextResponse.json({ data });
  * });
  */
@@ -325,6 +326,6 @@ export function withAuth(handler: AuthenticatedHandler) {
       return apiResponse.unauthorized();
     }
 
-    return handler(request, session as AuthenticatedSession, context);
+    return handler(request, session as AuthenticatedSession, context as RouteContext);
   });
 }

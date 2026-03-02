@@ -5,7 +5,7 @@ import { findDuplicates } from '@/lib/duplicate-detection';
 // GET /api/people/[id]/duplicates - Find potential duplicates for a person
 export const GET = withAuth(async (_request, session, context) => {
   try {
-    const { id } = await context!.params;
+    const { id } = await context.params;
 
     const target = await prisma.person.findUnique({
       where: { id, userId: session.user.id, deletedAt: null },

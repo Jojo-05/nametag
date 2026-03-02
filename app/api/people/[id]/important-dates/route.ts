@@ -6,7 +6,7 @@ import { canEnableReminder } from '@/lib/billing';
 // GET /api/people/[id]/important-dates - List important dates for a person
 export const GET = withAuth(async (_request, session, context) => {
   try {
-    const { id } = await context!.params;
+    const { id } = await context.params;
 
     // Check if person exists and belongs to user
     const person = await prisma.person.findUnique({
@@ -31,7 +31,7 @@ export const GET = withAuth(async (_request, session, context) => {
 // POST /api/people/[id]/important-dates - Create a new important date for a person
 export const POST = withAuth(async (request, session, context) => {
   try {
-    const { id } = await context!.params;
+    const { id } = await context.params;
 
     // Check if person exists and belongs to user
     const person = await prisma.person.findUnique({

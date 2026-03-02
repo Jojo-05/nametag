@@ -5,7 +5,7 @@ import { apiResponse, handleApiError, parseRequestBody, withAuth } from '@/lib/a
 // GET /api/groups/[id] - Get a single group
 export const GET = withAuth(async (_request, session, context) => {
   try {
-    const { id } = await context!.params;
+    const { id } = await context.params;
 
     const group = await prisma.group.findUnique({
       where: {
@@ -34,7 +34,7 @@ export const GET = withAuth(async (_request, session, context) => {
 // PUT /api/groups/[id] - Update a group
 export const PUT = withAuth(async (request, session, context) => {
   try {
-    const { id } = await context!.params;
+    const { id } = await context.params;
 
     const body = await parseRequestBody(request);
     const validation = validateRequest(updateGroupSchema, body);
@@ -95,7 +95,7 @@ export const PUT = withAuth(async (request, session, context) => {
 // DELETE /api/groups/[id] - Delete a group
 export const DELETE = withAuth(async (request, session, context) => {
   try {
-    const { id } = await context!.params;
+    const { id } = await context.params;
 
     // Check if deletePeople parameter is set
     const url = new URL(request.url);
