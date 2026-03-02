@@ -3,7 +3,7 @@ import { redirect, notFound } from 'next/navigation';
 import Link from 'next/link';
 import BackLink from '@/components/BackLink';
 import { prisma } from '@/lib/prisma';
-import DeleteUserRelationshipButton from '@/components/DeleteUserRelationshipButton';
+import UserRelationshipCard from '@/components/UserRelationshipCard';
 import RelationshipManager from '@/components/RelationshipManager';
 import UnifiedNetworkGraph from '@/components/UnifiedNetworkGraph';
 import Navigation from '@/components/Navigation';
@@ -718,47 +718,12 @@ export default async function PersonDetailsPage({
 
                 {/* Relationship to user */}
                 {relationshipToUser && (
-                  <div className="mb-4 p-3 bg-primary/10 border border-primary/30 rounded-lg">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-1 flex-wrap text-foreground">
-                        {t.rich('isYourRelationship', {
-                          name: () => (
-                            <span className="font-medium">
-                              {formatGraphName(person)}
-                            </span>
-                          ),
-                          type: () => (
-                            <span
-                              className="inline-flex items-center px-2 py-1 rounded text-xs font-medium"
-                              style={{
-                                backgroundColor: relationshipToUser.color
-                                  ? `${relationshipToUser.color}20`
-                                  : '#E5E7EB',
-                                color: relationshipToUser.color || '#374151',
-                              }}
-                            >
-                              {relationshipToUser.label}
-                            </span>
-                          ),
-                        })}
-                      </div>
-                      <div className="flex gap-3">
-                        <Link
-                          href={`/people/${person.id}/edit`}
-                          className="text-primary hover:text-primary-dark transition-colors"
-                          title={t('edit')}
-                        >
-                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                          </svg>
-                        </Link>
-                        <DeleteUserRelationshipButton
-                          personId={person.id}
-                          personName={formatFullName(person)}
-                        />
-                      </div>
-                    </div>
-                  </div>
+                  <UserRelationshipCard
+                    personId={person.id}
+                    personName={formatGraphName(person)}
+                    relationshipToUser={relationshipToUser}
+                    relationshipTypes={relationshipTypes}
+                  />
                 )}
 
                 {/* Relationships to other people */}
