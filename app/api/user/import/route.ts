@@ -65,6 +65,7 @@ export const POST = withAuth(async (request, session) => {
         const existingPerson = await prisma.person.findFirst({
           where: {
             userId: session.user.id,
+            deletedAt: null,
             name: {
               equals: person.name,
               mode: 'insensitive',
@@ -102,6 +103,7 @@ export const POST = withAuth(async (request, session) => {
         const existingGroup = await prisma.group.findFirst({
           where: {
             userId: session.user.id,
+            deletedAt: null,
             name: {
               equals: group.name,
               mode: 'insensitive',
@@ -143,6 +145,7 @@ export const POST = withAuth(async (request, session) => {
         const existing = await prisma.relationshipType.findFirst({
           where: {
             userId: session.user.id,
+            deletedAt: null,
             name: { equals: relType.name, mode: 'insensitive' },
           },
         });
@@ -186,6 +189,7 @@ export const POST = withAuth(async (request, session) => {
       const existingGroup = await prisma.group.findFirst({
         where: {
           userId: session.user.id,
+          deletedAt: null,
           name: {
             equals: group.name,
             mode: 'insensitive',
@@ -216,6 +220,7 @@ export const POST = withAuth(async (request, session) => {
       const existingPerson = await prisma.person.findFirst({
         where: {
           userId: session.user.id,
+          deletedAt: null,
           name: {
             equals: person.name,
             mode: 'insensitive',
@@ -242,6 +247,7 @@ export const POST = withAuth(async (request, session) => {
           const relType = await prisma.relationshipType.findFirst({
             where: {
               userId: session.user.id,
+              deletedAt: null,
               name: person.relationshipToUser.name,
             },
           });
@@ -310,6 +316,7 @@ export const POST = withAuth(async (request, session) => {
           const relType = await prisma.relationshipType.findFirst({
             where: {
               userId: session.user.id,
+              deletedAt: null,
               name: relationship.relationshipType.name,
             },
           });
@@ -322,6 +329,7 @@ export const POST = withAuth(async (request, session) => {
             personId: newPersonId,
             relatedPersonId: newRelatedPersonId,
             relationshipTypeId: relationshipTypeId,
+            deletedAt: null,
           },
         });
 

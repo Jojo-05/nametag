@@ -73,6 +73,7 @@ export const POST = withLogging(async function POST(request: Request) {
       where: {
         id: { in: personIds },
         userId: session.user.id,
+        deletedAt: null,
       },
       include: {
         phoneNumbers: true,

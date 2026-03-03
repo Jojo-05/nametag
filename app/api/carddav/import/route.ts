@@ -112,6 +112,7 @@ export const POST = withLogging(async function POST(request: Request) {
           where: {
             uid: { in: allUIDs },
             userId: session.user.id,
+            deletedAt: null,
           },
           select: { id: true, uid: true },
         })
@@ -201,7 +202,7 @@ export const POST = withLogging(async function POST(request: Request) {
     const validRelTypeIds = new Set<string>();
     if (allRelTypeIds.size > 0) {
       const validRelTypes = await prisma.relationshipType.findMany({
-        where: { id: { in: [...allRelTypeIds] }, userId: session.user.id },
+        where: { id: { in: [...allRelTypeIds] }, userId: session.user.id, deletedAt: null },
         select: { id: true },
       });
       for (const rt of validRelTypes) validRelTypeIds.add(rt.id);
@@ -313,6 +314,7 @@ export const POST = withLogging(async function POST(request: Request) {
             where: {
               id: { in: mergedGroupIds },
               userId: session.user.id,
+              deletedAt: null,
             },
           });
 

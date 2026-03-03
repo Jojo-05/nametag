@@ -38,6 +38,7 @@ export const POST = withAuth(async (request, session) => {
       const existingPerson = await prisma.person.findFirst({
         where: {
           userId: session.user.id,
+          deletedAt: null,
           name: {
             equals: person.name,
             mode: 'insensitive',
@@ -82,6 +83,7 @@ export const POST = withAuth(async (request, session) => {
       const existingGroup = await prisma.group.findFirst({
         where: {
           userId: session.user.id,
+          deletedAt: null,
           name: {
             equals: group.name,
             mode: 'insensitive',

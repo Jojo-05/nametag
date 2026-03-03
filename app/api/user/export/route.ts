@@ -23,6 +23,7 @@ export const GET = withAuth(async (request, session) => {
       prisma.person.findMany({
         where: {
           userId: session.user.id,
+          deletedAt: null,
           ...(filterByGroups && filterByGroups.length > 0
             ? {
                 groups: {
@@ -52,6 +53,7 @@ export const GET = withAuth(async (request, session) => {
             },
           },
           relationshipsFrom: {
+            where: { deletedAt: null },
             include: {
               relatedPerson: {
                 select: {
@@ -109,10 +111,10 @@ export const GET = withAuth(async (request, session) => {
         },
       }),
       prisma.group.findMany({
-        where: { userId: session.user.id },
+        where: { userId: session.user.id, deletedAt: null },
       }),
       prisma.relationshipType.findMany({
-        where: { userId: session.user.id },
+        where: { userId: session.user.id, deletedAt: null },
       }),
     ]);
 
