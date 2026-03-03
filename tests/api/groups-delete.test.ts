@@ -236,12 +236,13 @@ describe('Groups DELETE API', () => {
       const context = { params: Promise.resolve({ id: 'group-1' }) };
       await DELETE(request, context);
 
-      // Verify the findUnique query includes userId check
+      // Verify the findUnique query includes userId check and soft-delete filter
       expect(mocks.groupFindUnique).toHaveBeenCalledWith(
         expect.objectContaining({
           where: {
             id: 'group-1',
             userId: 'user-123',
+            deletedAt: null,
           },
         })
       );

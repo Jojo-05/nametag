@@ -11,6 +11,7 @@ export const DELETE = withAuth(async (_request, session, context) => {
       where: {
         id,
         userId: session.user.id,
+        deletedAt: null,
       },
     });
 

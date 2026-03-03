@@ -20,6 +20,7 @@ export const POST = withAuth(async (request, session, context) => {
       where: {
         id,
         userId: session.user.id,
+        deletedAt: null,
       },
     });
 
@@ -32,6 +33,7 @@ export const POST = withAuth(async (request, session, context) => {
       where: {
         id: personId,
         userId: session.user.id,
+        deletedAt: null,
       },
     });
 

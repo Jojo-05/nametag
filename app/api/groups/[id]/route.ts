@@ -11,6 +11,7 @@ export const GET = withAuth(async (_request, session, context) => {
       where: {
         id,
         userId: session.user.id,
+        deletedAt: null,
       },
       include: {
         people: {
@@ -50,6 +51,7 @@ export const PUT = withAuth(async (request, session, context) => {
       where: {
         id,
         userId: session.user.id,
+        deletedAt: null,
       },
     });
 
@@ -61,6 +63,7 @@ export const PUT = withAuth(async (request, session, context) => {
     const duplicateGroup = await prisma.group.findFirst({
       where: {
         userId: session.user.id,
+        deletedAt: null,
         name: {
           equals: name,
           mode: 'insensitive',
@@ -106,6 +109,7 @@ export const DELETE = withAuth(async (request, session, context) => {
       where: {
         id,
         userId: session.user.id,
+        deletedAt: null,
       },
       include: {
         people: {

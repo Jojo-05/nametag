@@ -10,6 +10,7 @@ export const GET = withAuth(async (_request, session) => {
     const groups = await prisma.group.findMany({
       where: {
         userId: session.user.id,
+        deletedAt: null,
       },
       include: {
         people: {
@@ -58,6 +59,7 @@ export const POST = withAuth(async (request, session) => {
     const existingGroup = await prisma.group.findFirst({
       where: {
         userId: session.user.id,
+        deletedAt: null,
         name: {
           equals: name,
           mode: 'insensitive',

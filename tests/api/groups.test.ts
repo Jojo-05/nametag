@@ -73,7 +73,7 @@ describe('Groups API', () => {
 
       expect(mocks.groupFindMany).toHaveBeenCalledWith(
         expect.objectContaining({
-          where: { userId: 'user-123' },
+          where: { userId: 'user-123', deletedAt: null },
         })
       );
     });
