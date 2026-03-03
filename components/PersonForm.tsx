@@ -368,11 +368,6 @@ export default function PersonForm({
     }
   };
 
-  const setLastContactToToday = () => {
-    const today = new Date().toISOString().split('T')[0];
-    setFormData({ ...formData, lastContact: today });
-  };
-
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       {error && (
