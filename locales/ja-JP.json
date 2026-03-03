@@ -1562,5 +1562,13 @@
       "generic": "問題が発生しました。もう一度試すか、アカウント設定から管理してください。",
       "goToDashboard": "ダッシュボードへ"
     }
+  },
+  "datePicker": {
+    "month": "月",
+    "day": "日",
+    "year": "年",
+    "today": "今日",
+    "yearUnknown": "年不明",
+    "yearUnknownTooltip": "チェックすると、月と日のみが保存されます。年は無視されます。"
   }
 }

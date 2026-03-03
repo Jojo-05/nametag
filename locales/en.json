@@ -1562,5 +1562,13 @@
       "generic": "Something went wrong. Please try again or manage your settings from your account.",
       "goToDashboard": "Go to Dashboard"
     }
+  },
+  "datePicker": {
+    "month": "Month",
+    "day": "Day",
+    "year": "Year",
+    "today": "Today",
+    "yearUnknown": "Year unknown",
+    "yearUnknownTooltip": "When checked, only the month and day will be saved. The year will be ignored."
   }
 }

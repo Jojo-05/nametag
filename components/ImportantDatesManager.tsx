@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { parseAsLocalDate, formatDate, formatDateWithoutYear } from '@/lib/date-format';
+import DatePicker from './ui/DatePicker';
 
 type ReminderType = 'ONCE' | 'RECURRING';
 type ReminderIntervalUnit = 'DAYS' | 'WEEKS' | 'MONTHS' | 'YEARS';
@@ -384,48 +385,19 @@ export default function ImportantDatesManager({
                   >
                     {t('date')}
                   </label>
-                  <input
-                    type="date"
-                    id={`edit-date-date-${index}`}
+                  <DatePicker
                     value={editingDate.date}
-                    onChange={(e) => {
+                    onChange={(val) => {
                       const value = editingDate.yearUnknown
-                        ? handleYearlessDateChange(e.target.value)
-                        : e.target.value;
+                        ? handleYearlessDateChange(val)
+                        : val;
                       setEditingDate({ ...editingDate, date: value });
                     }}
-                    className="w-full px-3 py-2 text-sm border border-border rounded-lg bg-surface text-foreground focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    dateFormat={dateFormat}
+                    showYearToggle
+                    yearUnknown={editingDate.yearUnknown}
+                    onYearUnknownChange={(val) => setEditingDate({ ...editingDate, yearUnknown: val })}
                   />
-                  <label className="flex items-center mt-2 cursor-pointer group">
-                    <input
-                      type="checkbox"
-                      checked={editingDate.yearUnknown}
-                      onChange={(e) => setEditingDate({ ...editingDate, yearUnknown: e.target.checked })}
-                      className="h-4 w-4 text-blue-600 border-border rounded focus:ring-blue-500"
-                    />
-                    <span className="ml-2 text-xs text-muted flex items-center gap-1">
-                      {t('yearUnknown')}
-                      <span className="relative inline-block">
-                        <svg
-                          className="w-3.5 h-3.5 text-muted hover:text-foreground transition-colors cursor-help"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                          aria-label={t('yearUnknownTooltip')}
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                          />
-                        </svg>
-                        <span className="invisible group-hover:visible absolute left-6 top-1/2 -translate-y-1/2 w-64 px-3 py-2 text-xs text-foreground bg-surface-elevated border border-border rounded-lg shadow-lg z-10 pointer-events-none">
-                          {t('yearUnknownTooltip')}
-                        </span>
-                      </span>
-                    </span>
-                  </label>
                 </div>
                 <ReminderFields
                   date={editingDate}
@@ -536,48 +508,19 @@ export default function ImportantDatesManager({
               >
                 {t('date')}
               </label>
-              <input
-                type="date"
-                id="new-date-date"
+              <DatePicker
                 value={newDate.date}
-                onChange={(e) => {
+                onChange={(val) => {
                   const value = newDate.yearUnknown
-                    ? handleYearlessDateChange(e.target.value)
-                    : e.target.value;
+                    ? handleYearlessDateChange(val)
+                    : val;
                   setNewDate({ ...newDate, date: value });
                 }}
-                className="w-full px-3 py-2 text-sm border border-border rounded-lg bg-surface text-foreground focus:outline-none focus:ring-2 focus:ring-blue-500"
+                dateFormat={dateFormat}
+                showYearToggle
+                yearUnknown={newDate.yearUnknown}
+                onYearUnknownChange={(val) => setNewDate({ ...newDate, yearUnknown: val })}
               />
-              <label className="flex items-center mt-2 cursor-pointer group">
-                <input
-                  type="checkbox"
-                  checked={newDate.yearUnknown}
-                  onChange={(e) => setNewDate({ ...newDate, yearUnknown: e.target.checked })}
-                  className="h-4 w-4 text-blue-600 border-border rounded focus:ring-blue-500"
-                />
-                <span className="ml-2 text-xs text-muted flex items-center gap-1">
-                  {t('yearUnknown')}
-                  <span className="relative inline-block">
-                    <svg
-                      className="w-3.5 h-3.5 text-muted hover:text-foreground transition-colors cursor-help"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      aria-label={t('yearUnknownTooltip')}
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                      />
-                    </svg>
-                    <span className="invisible group-hover:visible absolute left-6 top-1/2 -translate-y-1/2 w-64 px-3 py-2 text-xs text-foreground bg-surface-elevated border border-border rounded-lg shadow-lg z-10 pointer-events-none">
-                      {t('yearUnknownTooltip')}
-                    </span>
-                  </span>
-                </span>
-              </label>
             </div>
             <ReminderFields
               date={newDate}

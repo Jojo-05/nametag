@@ -14,6 +14,7 @@ import PersonEmailManager from './PersonEmailManager';
 import PersonAddressManager from './PersonAddressManager';
 import PersonUrlManager from './PersonUrlManager';
 import { Button } from './ui/Button';
+import DatePicker from './ui/DatePicker';
 
 type ReminderIntervalUnit = 'DAYS' | 'WEEKS' | 'MONTHS' | 'YEARS';
 
@@ -365,11 +366,6 @@ export default function PersonForm({
     } finally {
       setIsLoading(false);
     }
-  };
-
-  const setLastContactToToday = () => {
-    const today = new Date().toISOString().split('T')[0];
-    setFormData({ ...formData, lastContact: today });
   };
 
   return (
@@ -792,25 +788,13 @@ export default function PersonForm({
       <Section>
         <SectionHeader>{t('sectionLastContact')}</SectionHeader>
         <div className="space-y-3">
-          <div className="flex gap-2">
-            <input
-              type="date"
-              id="lastContact"
-              value={formData.lastContact}
-              max={new Date().toISOString().split('T')[0]}
-              onChange={(e) =>
-                setFormData({ ...formData, lastContact: e.target.value })
-              }
-              className="flex-1 px-3 py-2 border border-border rounded-lg bg-surface text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
-            />
-            <Button
-              type="button"
-              variant="secondary"
-              onClick={setLastContactToToday}
-            >
-              {t('todayButton')}
-            </Button>
-          </div>
+          <DatePicker
+            value={formData.lastContact}
+            onChange={(val) => setFormData({ ...formData, lastContact: val })}
+            dateFormat={dateFormat}
+            showTodayButton
+            maxDate={new Date().toISOString().split('T')[0]}
+          />
 
           {/* Contact Reminder */}
           <div className="p-3 bg-surface-elevated rounded-lg">

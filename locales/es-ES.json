@@ -1562,5 +1562,13 @@
       "generic": "Algo salió mal. Por favor intenta de nuevo o administra tu configuración desde tu cuenta.",
       "goToDashboard": "Ir al panel"
     }
+  },
+  "datePicker": {
+    "month": "Mes",
+    "day": "Día",
+    "year": "Año",
+    "today": "Hoy",
+    "yearUnknown": "Año desconocido",
+    "yearUnknownTooltip": "Cuando está marcado, solo se guardarán el mes y el día. El año será ignorado."
   }
 }

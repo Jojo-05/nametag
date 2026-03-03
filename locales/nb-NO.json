@@ -1562,5 +1562,13 @@
       "generic": "Noe gikk galt. Prøv igjen, eller administrer innstillingene dine fra kontoen din.",
       "goToDashboard": "Gå til dashbordet"
     }
+  },
+  "datePicker": {
+    "month": "Måned",
+    "day": "Dag",
+    "year": "År",
+    "today": "I dag",
+    "yearUnknown": "År ukjent",
+    "yearUnknownTooltip": "Når dette er avkrysset, lagres kun måneden og dagen. Året ignoreres."
   }
 }

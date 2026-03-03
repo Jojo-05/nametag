@@ -1562,5 +1562,13 @@
       "generic": "Etwas ist schiefgelaufen. Bitte versuche es erneut oder verwalte deine Einstellungen in deinem Konto.",
       "goToDashboard": "Zum Dashboard"
     }
+  },
+  "datePicker": {
+    "month": "Monat",
+    "day": "Tag",
+    "year": "Jahr",
+    "today": "Heute",
+    "yearUnknown": "Jahr unbekannt",
+    "yearUnknownTooltip": "Wenn aktiviert, werden nur der Monat und der Tag gespeichert. Das Jahr wird ignoriert."
   }
 }
