@@ -33,6 +33,8 @@ export default function PersonAvatar({
   }, []);
 
   const initials = name
+    .replace(/[''\u2018\u2019][^''\u2018\u2019]*[''\u2018\u2019]/g, '')
+    .replace(/[""\u201C\u201D][^""\u201C\u201D]*[""\u201C\u201D]/g, '')
     .split(/\s+/)
     .filter(Boolean)
     .slice(0, 2)
