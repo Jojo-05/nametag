@@ -146,6 +146,7 @@ export default function PersonForm({
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const [photoPreview, setPhotoPreview] = useState<string | null>(null);
+  const [photoRemoved, setPhotoRemoved] = useState(false);
   const [pendingPhotoBlob, setPendingPhotoBlob] = useState<Blob | null>(null);
   const [cropImageSrc, setCropImageSrc] = useState<string | null>(null);
   const [isUploadingPhoto, setIsUploadingPhoto] = useState(false);
@@ -315,6 +316,7 @@ export default function PersonForm({
     }
     const previewUrl = URL.createObjectURL(blob);
     setPhotoPreview(previewUrl);
+    setPhotoRemoved(false);
 
     if (person?.id) {
       // Edit mode: upload immediately
@@ -345,6 +347,7 @@ export default function PersonForm({
       URL.revokeObjectURL(photoPreview);
     }
     setPhotoPreview(null);
+    setPhotoRemoved(true);
     setPendingPhotoBlob(null);
 
     if (person?.id) {
@@ -492,7 +495,7 @@ export default function PersonForm({
             <PersonAvatar
               personId={person?.id || 'new'}
               name={formData.name || formData.surname || '?'}
-              photo={person?.photo}
+              photo={photoRemoved ? null : person?.photo}
               size={80}
               loading="eager"
             />
@@ -529,7 +532,7 @@ export default function PersonForm({
           </label>
 
           {/* Remove button (top-right, visible on hover) */}
-          {(photoPreview || person?.photo) && (
+          {(photoPreview || (person?.photo && !photoRemoved)) && (
             <button
               type="button"
               onClick={handlePhotoRemove}
@@ -553,7 +556,7 @@ export default function PersonForm({
           )}
         </div>
         <span className="text-xs text-muted">
-          {person?.photo || photoPreview ? tPhoto('changeLabel') : tPhoto('uploadLabel')}
+          {(person?.photo && !photoRemoved) || photoPreview ? tPhoto('changeLabel') : tPhoto('uploadLabel')}
         </span>
       </div>
 
