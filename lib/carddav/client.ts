@@ -22,6 +22,7 @@ export interface VCard {
 export interface CardDavClientInterface {
   fetchAddressBooks(): Promise<AddressBook[]>;
   fetchVCards(addressBook: AddressBook): Promise<VCard[]>;
+  fetchVCard(addressBook: AddressBook, url: string): Promise<VCard | null>;
   createVCard(addressBook: AddressBook, vCardData: string, filename: string): Promise<VCard>;
   updateVCard(vCard: VCard, newData: string): Promise<VCard>;
   deleteVCard(vCard: VCard): Promise<void>;
@@ -85,6 +86,25 @@ export async function createCardDavClient(
         etag: vc.etag || '',
         data: vc.data || '',
       }));
+    },
+
+    async fetchVCard(addressBook: AddressBook, url: string): Promise<VCard | null> {
+      const absoluteUrl = resolveUrl(serverUrl, url);
+      const vCards = await client.fetchVCards({
+        addressBook: addressBook.raw,
+        objectUrls: [absoluteUrl],
+      });
+
+      if (!vCards || vCards.length === 0) {
+        return null;
+      }
+
+      const vc = vCards[0] as DAVVCard;
+      return {
+        url: resolveUrl(serverUrl, vc.url),
+        etag: vc.etag || '',
+        data: vc.data || '',
+      };
     },
 
     async createVCard(
