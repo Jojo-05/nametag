@@ -85,6 +85,8 @@ export default function PhotoCropModal({ imageSrc, onConfirm, onCancel }: PhotoC
             image={imageSrc}
             crop={crop}
             zoom={zoom}
+            minZoom={1}
+            maxZoom={5}
             aspect={1}
             cropShape="round"
             showGrid={false}
