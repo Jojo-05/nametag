@@ -145,7 +145,6 @@ export async function syncFromServer(
       try {
         // Parse vCard
         const parsedData = vCardToPerson(vCard.data);
-        const parsedEnhanced = parseVCard(vCard.data);
 
         onProgress?.({
           phase: 'pull',
@@ -270,6 +269,9 @@ export async function syncFromServer(
           } else if (remoteChanged) {
             // Only remote changed - update local
             await updatePersonFromVCard(fullMapping.personId, parsedData, userId);
+
+            // Parse enhanced data only when needed (avoids double-parsing every vCard)
+            const parsedEnhanced = parseVCard(vCard.data);
 
             await prisma.cardDavMapping.update({
               where: { id: mapping.id },
