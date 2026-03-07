@@ -596,6 +596,8 @@ model CardDavConnection {
   username         String
   password         String   // Encrypted with AES-256-GCM
   provider         String?  // "google", "icloud", "outlook", "nextcloud", "custom"
+  addressBookUrl   String?  // URL of the selected address book collection
+  addressBookName  String?  // Display name for the UI
 
   // Sync config
   syncEnabled      Boolean  @default(true)
