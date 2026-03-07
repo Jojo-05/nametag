@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
 import { Button } from '@/components/ui/Button';
 import type { WizardData } from './Step1ServerConfig';
@@ -42,13 +42,15 @@ export default function Step2AddressBookSelect({
   };
 
   // Auto-select first if nothing selected yet
-  if (!data.addressBookUrl && addressBooks.length > 0) {
-    const first = addressBooks[0];
-    onUpdate({
-      addressBookUrl: first.url,
-      addressBookName: first.displayName || null,
-    });
-  }
+  useEffect(() => {
+    if (!data.addressBookUrl && addressBooks.length > 0) {
+      const first = addressBooks[0];
+      onUpdate({
+        addressBookUrl: first.url,
+        addressBookName: first.displayName || null,
+      });
+    }
+  }, [data.addressBookUrl, addressBooks, onUpdate]);
 
   return (
     <div className="space-y-6">

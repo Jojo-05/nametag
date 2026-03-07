@@ -64,7 +64,6 @@ export default function ConnectionWizard({ isOpen, onClose }: ConnectionWizardPr
     stepSync: tw('step3Title'),
   };
 
-  const stepTitles = steps.map(key => stepTitleMap[key]);
   const currentStepKey = steps[currentStep - 1];
 
   // When moving past step 1 and there's exactly 1 address book, auto-select it
@@ -83,7 +82,7 @@ export default function ConnectionWizard({ isOpen, onClose }: ConnectionWizardPr
     <Modal
       isOpen={isOpen}
       onClose={onClose}
-      title={stepTitles[currentStep - 1]}
+      title={stepTitleMap[currentStepKey]}
       size="lg"
     >
       <div>
