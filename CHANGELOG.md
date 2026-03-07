@@ -6,6 +6,28 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+## [0.32.0](https://github.com/mattogodoy/nametag/compare/v0.31.1...v0.32.0) (2026-03-07)
+
+
+### Features
+
+* **carddav:** accept addressBookUrl and addressBookName when creating connection ([6f6c9d9](https://github.com/mattogodoy/nametag/commit/6f6c9d92b6d0501d0cc806572fd6582888efa1fa))
+* **carddav:** add address book selection wizard step component ([f47e789](https://github.com/mattogodoy/nametag/commit/f47e78910e436a574501ae9f73bb3686f5f6857d))
+* **carddav:** add addressBookUrl and addressBookName to CardDavConnection ([d0d4cf9](https://github.com/mattogodoy/nametag/commit/d0d4cf9956f5055c807bc451da817421bca6b98c))
+* **carddav:** add i18n keys for address book selection wizard step ([5b94f71](https://github.com/mattogodoy/nametag/commit/5b94f71477adccc9ceda268e7a493553b1dd69a0))
+* **carddav:** add shared getAddressBook helper for collection selection ([381092e](https://github.com/mattogodoy/nametag/commit/381092e1214a4d0a542f3ddc303c9bd970a3947d))
+* **carddav:** address book collection selection ([68adc7e](https://github.com/mattogodoy/nametag/commit/68adc7ead6e12312c038f1d7ab10589116f2cf35))
+* **carddav:** integrate address book selection into connection wizard ([47bf064](https://github.com/mattogodoy/nametag/commit/47bf064b55f91d38c26a5ab293c33fae05021a48))
+* **carddav:** return address book list from test connection endpoint ([714c6f3](https://github.com/mattogodoy/nametag/commit/714c6f347ca464b2bae20b987e470d4c52d34691))
+* **carddav:** show contact count per address book in wizard ([4b81169](https://github.com/mattogodoy/nametag/commit/4b81169c6e4ba211f106d8abc50b8d3183287033))
+
+
+### Bug Fixes
+
+* **carddav:** fix step indicator alignment and fetch address book descriptions ([bb180df](https://github.com/mattogodoy/nametag/commit/bb180df6cba7cd1fd9177e1a2573c9e93c74683c))
+* **carddav:** move auto-select to useEffect to avoid state update during render ([0079c2c](https://github.com/mattogodoy/nametag/commit/0079c2c6399fa9aa7c4ef5f918718b87a474a223))
+* **carddav:** read address book description from raw PROPFIND response ([41b058f](https://github.com/mattogodoy/nametag/commit/41b058f5b1f2cb99284bfe7329d9c32a382bc14c))
+
 ## [0.31.1](https://github.com/mattogodoy/nametag/compare/v0.31.0...v0.31.1) (2026-03-05)
 
 
