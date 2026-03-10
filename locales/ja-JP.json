@@ -761,6 +761,7 @@
       "sectionWebsites": "ウェブサイト",
       "sectionGroups": "グループ",
       "sectionLastContact": "最終連絡日",
+      "clearLastContact": "最終連絡日を削除",
       "sectionImportantDates": "重要な日付",
       "sectionNotes": "メモ",
       "nameLabel": "名前",

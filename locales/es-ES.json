@@ -761,6 +761,7 @@
       "sectionWebsites": "Sitios Web",
       "sectionGroups": "Grupos",
       "sectionLastContact": "Último Contacto",
+      "clearLastContact": "Eliminar fecha de último contacto",
       "sectionImportantDates": "Fechas Importantes",
       "sectionNotes": "Notas",
       "nameLabel": "Nombre",

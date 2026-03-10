@@ -960,6 +960,15 @@ export default function PersonForm({
             showTodayButton
             maxDate={new Date().toISOString().split('T')[0]}
           />
+          {formData.lastContact && (
+            <button
+              type="button"
+              onClick={() => setFormData({ ...formData, lastContact: '' })}
+              className="text-sm text-red-500 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300"
+            >
+              {t('clearLastContact')}
+            </button>
+          )}
 
           {/* Contact Reminder */}
           <div className="p-3 bg-surface-elevated rounded-lg">
