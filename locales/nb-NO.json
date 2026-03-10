@@ -1101,7 +1101,11 @@
       "uploadError": "Kunne ikke laste opp bilde",
       "removeError": "Kunne ikke fjerne bilde",
       "formatError": "Format ikke støttet. Bruk JPEG, PNG, GIF eller WebP.",
-      "sizeError": "Bildet må være mindre enn 10 MB"
+      "sizeError": "Bildet må være mindre enn 10 MB",
+      "sourceTitle": "Legg til bilde",
+      "dropzoneText": "Dra og slipp, lim inn eller klikk for å bla",
+      "dropzoneActive": "Slipp bildet her",
+      "close": "Lukk"
     }
   },
   "groups": {

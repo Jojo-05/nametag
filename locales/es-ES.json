@@ -1101,7 +1101,11 @@
       "uploadError": "Error al subir la foto",
       "removeError": "Error al eliminar la foto",
       "formatError": "Formato no soportado. Usa JPEG, PNG, GIF o WebP.",
-      "sizeError": "La foto debe ser menor de 10MB"
+      "sizeError": "La foto debe ser menor de 10MB",
+      "sourceTitle": "Agregar foto",
+      "dropzoneText": "Arrastra y suelta, pega o haz clic para buscar",
+      "dropzoneActive": "Suelta la imagen aquí",
+      "close": "Cerrar"
     }
   },
   "groups": {

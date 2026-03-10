@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, FormEvent, ChangeEvent } from 'react';
+import { useState, FormEvent } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { toast } from 'sonner';
@@ -8,6 +8,7 @@ import { useTranslations } from 'next-intl';
 import PersonAutocomplete from './PersonAutocomplete';
 import PersonAvatar from './PersonPhoto';
 import PhotoCropModal from './PhotoCropModal';
+import PhotoSourceModal from './PhotoSourceModal';
 import GroupsSelector from './GroupsSelector';
 import ImportantDatesManager from './ImportantDatesManager';
 import MarkdownEditor from './MarkdownEditor';
@@ -148,7 +149,7 @@ export default function PersonForm({
   const [photoRemoved, setPhotoRemoved] = useState(false);
   const [pendingPhotoBlob, setPendingPhotoBlob] = useState<Blob | null>(null);
   const [cropImageSrc, setCropImageSrc] = useState<string | null>(null);
-  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [showPhotoSourceModal, setShowPhotoSourceModal] = useState(false);
 
   // Initialize knownThrough from URL params if provided
   const initialKnownThroughPerson = initialKnownThrough
@@ -277,26 +278,8 @@ export default function PersonForm({
     }
   };
 
-  const ALLOWED_PHOTO_TYPES = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
-  const MAX_PHOTO_SIZE = 10 * 1024 * 1024; // 10MB
-
-  const handlePhotoSelect = (e: ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-
-    // Reset input so re-selecting same file triggers change
-    if (fileInputRef.current) {
-      fileInputRef.current.value = '';
-    }
-
-    if (!ALLOWED_PHOTO_TYPES.includes(file.type)) {
-      toast.error(tPhoto('formatError'));
-      return;
-    }
-    if (file.size > MAX_PHOTO_SIZE) {
-      toast.error(tPhoto('sizeError'));
-      return;
-    }
+  const handlePhotoSourceSelect = (file: File) => {
+    setShowPhotoSourceModal(false);
 
     const reader = new FileReader();
     reader.onload = () => {
@@ -482,7 +465,11 @@ export default function PersonForm({
           )}
 
           {/* Upload overlay on hover */}
-          <label className="absolute inset-0 rounded-full flex items-center justify-center bg-black/0 group-hover:bg-black/40 cursor-pointer transition-colors">
+          <button
+            type="button"
+            onClick={() => setShowPhotoSourceModal(true)}
+            className="absolute inset-0 rounded-full flex items-center justify-center bg-black/0 group-hover:bg-black/40 cursor-pointer transition-colors"
+          >
             <svg
               className="w-6 h-6 text-white opacity-0 group-hover:opacity-100 transition-opacity"
               fill="none"
@@ -502,14 +489,7 @@ export default function PersonForm({
                 d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"
               />
             </svg>
-            <input
-              ref={fileInputRef}
-              type="file"
-              accept="image/jpeg,image/png,image/gif,image/webp"
-              onChange={handlePhotoSelect}
-              className="hidden"
-            />
-          </label>
+          </button>
 
           {/* Remove button (top-right, visible on hover) */}
           {(photoPreview || (person?.photo && !photoRemoved)) && (
@@ -524,13 +504,19 @@ export default function PersonForm({
               </svg>
             </button>
           )}
-
-
         </div>
         <span className="text-xs text-muted">
           {(person?.photo && !photoRemoved) || photoPreview ? tPhoto('changeLabel') : tPhoto('uploadLabel')}
         </span>
       </div>
+
+      {/* Photo source modal */}
+      {showPhotoSourceModal && (
+        <PhotoSourceModal
+          onSelect={handlePhotoSourceSelect}
+          onClose={() => setShowPhotoSourceModal(false)}
+        />
+      )}
 
       {/* Crop modal */}
       {cropImageSrc && (
