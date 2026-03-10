@@ -1101,7 +1101,11 @@
       "uploadError": "Failed to upload photo",
       "removeError": "Failed to remove photo",
       "formatError": "Unsupported format. Use JPEG, PNG, GIF, or WebP.",
-      "sizeError": "Photo must be smaller than 10MB"
+      "sizeError": "Photo must be smaller than 10MB",
+      "sourceTitle": "Add Photo",
+      "dropzoneText": "Drag and drop, paste, or click to browse",
+      "dropzoneActive": "Drop image here",
+      "close": "Close"
     }
   },
   "groups": {

@@ -6,6 +6,23 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+## [0.33.0](https://github.com/mattogodoy/nametag/compare/v0.32.1...v0.33.0) (2026-03-10)
+
+
+### Features
+
+* add i18n keys for PhotoSourceModal component ([29122a7](https://github.com/mattogodoy/nametag/commit/29122a7378908f596b19f5f4c643355fff91afb0))
+* add option to remove last contact date from person form ([c6461fe](https://github.com/mattogodoy/nametag/commit/c6461fe85e5aa0ba9eff2395b7e8077a4d81d748))
+* add PhotoSourceModal component with file/drag/paste support ([02bce8b](https://github.com/mattogodoy/nametag/commit/02bce8bfe6711a0c65be3d84d8a4a74d7b1228aa))
+* integrate PhotoSourceModal into PersonForm ([4cd45be](https://github.com/mattogodoy/nametag/commit/4cd45bebc5ecdf55257e3cd07482242ddf001493))
+
+
+### Bug Fixes
+
+* disable CardDAV sync by default when creating a new person ([20dcbe3](https://github.com/mattogodoy/nametag/commit/20dcbe359153f15accbef70a01a075d70ed7ac24))
+* remove unused variables and imports flagged by linter ([57a222e](https://github.com/mattogodoy/nametag/commit/57a222e6dbeab24057cec364febbc4e456754e7b))
+* remove unused waitFor import from PhotoSourceModal tests ([99d56e9](https://github.com/mattogodoy/nametag/commit/99d56e937cd89145e46ae7080948636ac121c2e1))
+
 ## [0.32.1](https://github.com/mattogodoy/nametag/compare/v0.32.0...v0.32.1) (2026-03-10)
 
 

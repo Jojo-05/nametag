@@ -1101,7 +1101,11 @@
       "uploadError": "写真のアップロードに失敗しました",
       "removeError": "写真の削除に失敗しました",
       "formatError": "サポートされていない形式です。JPEG、PNG、GIF、またはWebPを使用してください。",
-      "sizeError": "写真は10MB以下にしてください"
+      "sizeError": "写真は10MB以下にしてください",
+      "sourceTitle": "写真を追加",
+      "dropzoneText": "ドラッグ＆ドロップ、貼り付け、またはクリックして参照",
+      "dropzoneActive": "ここに画像をドロップ",
+      "close": "閉じる"
     }
   },
   "groups": {
