@@ -6,7 +6,7 @@ import { toast } from 'sonner';
 import 'flag-icons/css/flag-icons.min.css';
 
 interface LanguageSelectorProps {
-  currentLanguage: 'en' | 'es-ES' | 'ja-JP' | 'nb-NO' | 'de-DE';
+  currentLanguage: 'en' | 'es-ES' | 'ja-JP' | 'nb-NO' | 'de-DE' | 'zh-CN';
 }
 
 const LANGUAGES = [
@@ -15,9 +15,10 @@ const LANGUAGES = [
   { code: 'ja-JP' as const, name: '日本語', flag: 'jp' },
   { code: 'nb-NO' as const, name: 'Norsk bokmål', flag: 'no' },
   { code: 'de-DE' as const, name: 'Deutsch (German)', flag: 'de' },
+  { code: 'zh-CN' as const, name: '简体中文', flag: 'cn' },
 ];
 
-const labelMap = { en: 'en', 'es-ES': 'esES', 'ja-JP': 'jaJP', 'nb-NO': 'nbNO', 'de-DE': 'deDE' } as const;
+const labelMap = { en: 'en', 'es-ES': 'esES', 'ja-JP': 'jaJP', 'nb-NO': 'nbNO', 'de-DE': 'deDE', 'zn-CN': 'zhCN' } as const;
 
 export default function LanguageSelector({ currentLanguage }: LanguageSelectorProps) {
   const t = useTranslations('settings.appearance.language');
@@ -27,7 +28,7 @@ export default function LanguageSelector({ currentLanguage }: LanguageSelectorPr
   const [selectedLanguage, setSelectedLanguage] = useState(currentLanguage);
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleLanguageChange = async (newLanguage: 'en' | 'es-ES' | 'ja-JP' | 'nb-NO' | 'de-DE') => {
+  const handleLanguageChange = async (newLanguage: 'en' | 'es-ES' | 'ja-JP' | 'nb-NO' | 'de-DE' | 'zh-CN') => {
     if (isLoading || newLanguage === selectedLanguage) return;
 
     setIsLoading(true);
