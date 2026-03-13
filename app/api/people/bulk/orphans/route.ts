@@ -11,6 +11,12 @@ export const POST = withAuth(async (request, session) => {
 
     const { personIds, selectAll } = validation.data;
 
+    // Fetch user's nameOrder preference
+    const user = await prisma.user.findUnique({
+      where: { id: session.user.id },
+      select: { nameOrder: true },
+    });
+
     // Resolve target person IDs
     let targetIds: string[];
     if (selectAll) {
@@ -69,7 +75,7 @@ export const POST = withAuth(async (request, session) => {
         if (hasConnectionToTarget) {
           orphans.push({
             id: person.id,
-            fullName: formatFullName(person),
+            fullName: formatFullName(person, user?.nameOrder),
           });
         }
       }

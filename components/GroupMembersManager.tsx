@@ -29,6 +29,7 @@ interface GroupMembersManagerProps {
   groupName: string;
   currentMembers: Member[];
   availablePeople: Person[];
+  nameOrder?: 'WESTERN' | 'EASTERN';
 }
 
 export default function GroupMembersManager({
@@ -36,6 +37,7 @@ export default function GroupMembersManager({
   groupName,
   currentMembers,
   availablePeople,
+  nameOrder,
 }: GroupMembersManagerProps) {
   const t = useTranslations('groups.members');
   const router = useRouter();
@@ -53,12 +55,12 @@ export default function GroupMembersManager({
   // Transform people to PillItem format
   const pillItems = availablePeople.map((person) => ({
     id: person.id,
-    label: formatFullName(person),
+    label: formatFullName(person, nameOrder),
   }));
 
   const selectedItems = currentMembers.map((member) => ({
     id: member.id,
-    label: formatFullName(member),
+    label: formatFullName(member, nameOrder),
   }));
 
   const handleAdd = async (item: { id: string; label: string }) => {
@@ -101,7 +103,7 @@ export default function GroupMembersManager({
         return;
       }
 
-      toast.success(t('removedSuccess', { name: formatFullName(member), group: groupName }));
+      toast.success(t('removedSuccess', { name: formatFullName(member, nameOrder), group: groupName }));
       router.refresh();
     } catch {
       toast.error(t('errorConnection'));

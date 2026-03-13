@@ -7,6 +7,12 @@ export const GET = withAuth(async (_request, session, context) => {
   try {
     const { id } = await context.params;
 
+    // Fetch user's nameOrder preference
+    const user = await prisma.user.findUnique({
+      where: { id: session.user.id },
+      select: { nameOrder: true },
+    });
+
     // Fetch the person and all their relationships in one query
     const person = await prisma.person.findUnique({
       where: {
@@ -77,7 +83,7 @@ export const GET = withAuth(async (_request, session, context) => {
       })
       .map((p) => ({
         id: p.id,
-        fullName: formatFullName(p),
+        fullName: formatFullName(p, user?.nameOrder),
       }));
 
     return apiResponse.ok({ orphans: potentialOrphans });

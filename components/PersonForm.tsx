@@ -116,6 +116,7 @@ interface PersonFormProps {
   mode: 'create' | 'edit';
   dateFormat?: 'MDY' | 'DMY' | 'YMD';
   hasCardDavConnection?: boolean;
+  nameOrder?: 'WESTERN' | 'EASTERN';
   initialName?: string;
   initialKnownThrough?: string;
   initialRelationshipType?: string;
@@ -135,6 +136,7 @@ export default function PersonForm({
   mode,
   dateFormat = 'MDY',
   hasCardDavConnection,
+  nameOrder,
   initialName,
   initialKnownThrough,
   initialRelationshipType,
@@ -675,6 +677,7 @@ export default function PersonForm({
                 value={knownThroughId}
                 onChange={handleKnownThroughChange}
                 placeholder={t('searchForPerson')}
+                nameOrder={nameOrder}
               />
               <p className="text-xs text-muted mt-1">
                 {t('knownThroughHelp')}

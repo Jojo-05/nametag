@@ -99,6 +99,13 @@ export async function getUpcomingEvents(userId: string): Promise<UpcomingEvent[]
   const today = new Date();
   today.setHours(0, 0, 0, 0);
 
+  // Fetch user's nameOrder preference
+  const user = await prisma.user.findUnique({
+    where: { id: userId },
+    select: { nameOrder: true },
+  });
+  const nameOrder = user?.nameOrder;
+
   const [importantDates, peopleWithContactReminders] = await Promise.all([
     prisma.importantDate.findMany({
       where: {
@@ -163,7 +170,7 @@ export async function getUpcomingEvents(userId: string): Promise<UpcomingEvent[]
       upcomingEvents.push({
         id: `important-${importantDate.id}`,
         personId: importantDate.person.id,
-        personName: formatFullName(importantDate.person),
+        personName: formatFullName(importantDate.person, nameOrder),
         type: 'important_date',
         title: importantDate.title,
         titleKey: null,
@@ -193,7 +200,7 @@ export async function getUpcomingEvents(userId: string): Promise<UpcomingEvent[]
         upcomingEvents.push({
           id: `contact-${person.id}`,
           personId: person.id,
-          personName: formatFullName(person),
+          personName: formatFullName(person, nameOrder),
           type: 'contact_reminder',
           title: null,
           titleKey: 'timeToCatchUp',

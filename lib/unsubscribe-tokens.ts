@@ -158,6 +158,13 @@ export async function getUnsubscribeDetails(
     return null;
   }
 
+  // Fetch user's nameOrder preference
+  const user = await prisma.user.findUnique({
+    where: { id: unsubToken.userId },
+    select: { nameOrder: true },
+  });
+  const nameOrder = user?.nameOrder;
+
   let entityName = '';
 
   if (unsubToken.reminderType === 'IMPORTANT_DATE') {
@@ -177,7 +184,7 @@ export async function getUnsubscribeDetails(
     });
 
     if (importantDate) {
-      const personName = formatFullName(importantDate.person);
+      const personName = formatFullName(importantDate.person, nameOrder);
       entityName = `${personName}'s ${importantDate.title}`;
     }
   } else if (unsubToken.reminderType === 'CONTACT') {
@@ -193,7 +200,7 @@ export async function getUnsubscribeDetails(
     });
 
     if (person) {
-      entityName = formatFullName(person);
+      entityName = formatFullName(person, nameOrder);
     }
   }
 

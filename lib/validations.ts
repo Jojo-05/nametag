@@ -335,6 +335,10 @@ export const updateDateFormatSchema = z.object({
   dateFormat: z.enum(['MDY', 'DMY', 'YMD']),
 });
 
+export const updateNameOrderSchema = z.object({
+  nameOrder: z.enum(['WESTERN', 'EASTERN']),
+});
+
 // ============================================
 // Import schema
 // ============================================

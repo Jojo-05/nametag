@@ -100,6 +100,7 @@ export default async function PersonDetailsPage({
     where: { id: session.user.id },
     select: {
       dateFormat: true,
+      nameOrder: true,
       name: true,
       surname: true,
       nickname: true,
@@ -107,6 +108,7 @@ export default async function PersonDetailsPage({
     },
   });
   const dateFormat = user?.dateFormat || 'MDY';
+  const nameOrder = user?.nameOrder;
 
   const [person, allPeople, relationshipTypes, cardDavConnection] = await Promise.all([
     prisma.person.findUnique({
@@ -266,9 +268,7 @@ export default async function PersonDetailsPage({
             <div className="px-6 py-5 border-b border-border flex flex-col sm:flex-row justify-between items-start gap-4">
               <div className="flex-1 min-w-0">
                 <h1 className="text-2xl sm:text-3xl font-bold text-foreground break-words">
-                  {person.name}
-                  {person.nickname && ` '${person.nickname}'`}
-                  {person.surname && ` ${person.surname}`}
+                  {formatFullName(person, nameOrder)}
                 </h1>
                 {person.groups.length > 0 && (
                   <div className="flex flex-wrap gap-2 mt-2">
@@ -314,10 +314,11 @@ export default async function PersonDetailsPage({
                 </Link>
                 <PersonActionsMenu
                   personId={person.id}
-                  personName={formatFullName(person)}
+                  personName={formatFullName(person, nameOrder)}
                   person={serializedPerson}
                   hasCardDavSync={!!cardDavConnection && !!person.cardDavMapping}
                   allPeople={allPeople}
+                  nameOrder={nameOrder}
                 />
               </div>
             </div>
@@ -329,7 +330,7 @@ export default async function PersonDetailsPage({
                   <div className="flex justify-center">
                     <PersonAvatar
                       personId={person.id}
-                      name={formatFullName(person)}
+                      name={formatFullName(person, nameOrder)}
                       photo={person.photo}
                       size={80}
                       loading="eager"
@@ -351,10 +352,7 @@ export default async function PersonDetailsPage({
                     <p className="text-foreground">
                       {[
                         person.prefix,
-                        person.name,
-                        person.middleName,
-                        person.surname,
-                        person.secondLastName,
+                        formatFullName(person, nameOrder),
                         person.suffix,
                       ]
                         .filter(Boolean)
@@ -702,7 +700,7 @@ export default async function PersonDetailsPage({
                 {relationshipToUser && (
                   <UserRelationshipCard
                     personId={person.id}
-                    personName={formatGraphName(person)}
+                    personName={formatGraphName(person, nameOrder)}
                     relationshipToUser={relationshipToUser}
                     relationshipTypes={relationshipTypes}
                     userName={user?.name || ''}
@@ -713,7 +711,7 @@ export default async function PersonDetailsPage({
                 {/* Relationships to other people */}
                 <RelationshipManager
                   personId={person.id}
-                  personName={formatGraphName(person)}
+                  personName={formatGraphName(person, nameOrder)}
                   relationships={person.relationshipsTo}
                   availablePeople={availablePeople}
                   relationshipTypes={relationshipTypes}
@@ -725,6 +723,7 @@ export default async function PersonDetailsPage({
                     photo: user?.photo || null,
                   }}
                   hasUserRelationship={!!person.relationshipToUserId}
+                  nameOrder={nameOrder}
                 />
               </div>
 

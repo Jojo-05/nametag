@@ -22,6 +22,21 @@ export default function NavigationSearch() {
   const [isOpen, setIsOpen] = useState(false);
   const [highlightedIndex, setHighlightedIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
+  const [nameOrder, setNameOrder] = useState<'WESTERN' | 'EASTERN'>('WESTERN');
+
+  // Fetch user's name order preference
+  useEffect(() => {
+    fetch('/api/user/profile')
+      .then(res => res.json())
+      .then(data => {
+        if (data.user?.nameOrder) {
+          setNameOrder(data.user.nameOrder);
+        }
+      })
+      .catch(() => {
+        // Silently fall back to WESTERN
+      });
+  }, []);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const debounceTimerRef = useRef<NodeJS.Timeout | null>(null);
@@ -198,8 +213,8 @@ export default function NavigationSearch() {
               onMouseEnter={() => setHighlightedIndex(index)}
             >
               <div className="flex items-center gap-2 text-foreground font-medium">
-                <PersonAvatar personId={person.id} name={formatFullName(person)} photo={person.photo} size={24} />
-                {formatFullName(person)}
+                <PersonAvatar personId={person.id} name={formatFullName(person, nameOrder)} photo={person.photo} size={24} />
+                {formatFullName(person, nameOrder)}
               </div>
             </button>
           ))}

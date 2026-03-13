@@ -137,10 +137,10 @@ interface Person
   groups: { group: Group }[];
 }
 
-export function personToGraphNode(person: Person, isCenter = false): GraphNode {
+export function personToGraphNode(person: Person, isCenter = false, nameOrder?: 'WESTERN' | 'EASTERN'): GraphNode {
   return {
     id: person.id,
-    label: formatGraphName(person),
+    label: formatGraphName(person, nameOrder),
     groups: person.groups.map((pg) => pg.group.name),
     colors: person.groups.map((pg) => pg.group.color || '#3B82F6'),
     isCenter,

@@ -38,7 +38,7 @@ async function testReminderEmail() {
 
     if (importantDate) {
       console.log('📅 Found Important Date Reminder:');
-      console.log(`   Person: ${formatFullName(importantDate.person)}`);
+      console.log(`   Person: ${formatFullName(importantDate.person, 'WESTERN')}`);
       console.log(`   Event: ${importantDate.title}`);
       console.log(`   User Email: ${importantDate.person.user.email}`);
       console.log(`   Reminder Enabled: ${importantDate.reminderEnabled}\n`);
@@ -65,7 +65,7 @@ async function testReminderEmail() {
 
       // Generate email template
       const template = await emailTemplates.importantDateReminder(
-        formatFullName(importantDate.person),
+        formatFullName(importantDate.person, 'WESTERN'),
         importantDate.title,
         formattedDate,
         unsubscribeUrl,
@@ -112,7 +112,7 @@ async function testReminderEmail() {
 
     if (person) {
       console.log('👤 Found Contact Reminder:');
-      console.log(`   Person: ${formatFullName(person)}`);
+      console.log(`   Person: ${formatFullName(person, 'WESTERN')}`);
       console.log(`   User Email: ${person.user.email}`);
       console.log(`   Reminder Enabled: ${person.contactReminderEnabled}\n`);
 
@@ -143,7 +143,7 @@ async function testReminderEmail() {
 
       // Generate email template
       const template = await emailTemplates.contactReminder(
-        formatFullName(person),
+        formatFullName(person, 'WESTERN'),
         lastContactFormatted,
         intervalText,
         unsubscribeUrl,

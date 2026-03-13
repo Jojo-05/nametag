@@ -3,6 +3,7 @@ import { describe, it, expect, beforeEach, vi } from 'vitest';
 const mocks = vi.hoisted(() => ({
   personFindMany: vi.fn(),
   cardDavConnectionFindUnique: vi.fn(),
+  userFindUnique: vi.fn(),
 }));
 
 vi.mock('../../lib/prisma', () => ({
@@ -12,6 +13,9 @@ vi.mock('../../lib/prisma', () => ({
     },
     cardDavConnection: {
       findUnique: mocks.cardDavConnectionFindUnique,
+    },
+    user: {
+      findUnique: mocks.userFindUnique,
     },
   },
 }));
@@ -29,6 +33,7 @@ import { POST } from '../../app/api/people/bulk/orphans/route';
 describe('Bulk Orphans API', () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    mocks.userFindUnique.mockResolvedValue({ nameOrder: 'WESTERN' });
   });
 
   it('should return orphans for multiple people', async () => {

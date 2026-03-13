@@ -13,6 +13,7 @@ const mocks = vi.hoisted(() => ({
   importantDateFindFirst: vi.fn(),
   personFindUnique: vi.fn(),
   personFindFirst: vi.fn(),
+  userFindUnique: vi.fn(),
   formatFullName: vi.fn(),
 }));
 
@@ -35,6 +36,9 @@ vi.mock('../../lib/prisma', () => ({
       findUnique: mocks.personFindUnique,
       findFirst: mocks.personFindFirst,
     },
+    user: {
+      findUnique: mocks.userFindUnique,
+    },
   },
 }));
 
@@ -53,6 +57,7 @@ import {
 describe('unsubscribe-tokens', () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    mocks.userFindUnique.mockResolvedValue({ nameOrder: 'WESTERN' });
   });
 
   describe('createUnsubscribeToken', () => {

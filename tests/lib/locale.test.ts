@@ -111,6 +111,7 @@ describe('Locale Utilities', () => {
         photo: null,
         theme: 'LIGHT',
         dateFormat: 'MDY',
+        nameOrder: 'WESTERN',
         createdAt: new Date(),
         updatedAt: new Date(),
       });
@@ -146,6 +147,7 @@ describe('Locale Utilities', () => {
         photo: null,
         theme: 'LIGHT',
         dateFormat: 'MDY',
+        nameOrder: 'WESTERN',
         createdAt: new Date(),
         updatedAt: new Date(),
       });

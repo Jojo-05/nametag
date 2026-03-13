@@ -73,6 +73,40 @@ describe('nameUtils', () => {
     });
   });
 
+  describe('formatPersonName - eastern order', () => {
+    it('should format name and surname in eastern order', () => {
+      expect(formatPersonName('Taro', 'Tanaka', null, null, null, 'EASTERN')).toBe('Tanaka Taro');
+    });
+
+    it('should format name only in eastern order (no change)', () => {
+      expect(formatPersonName('Taro', null, null, null, null, 'EASTERN')).toBe('Taro');
+    });
+
+    it('should format name with nickname in eastern order', () => {
+      expect(formatPersonName('Charles', 'Brown', null, null, 'Charlie', 'EASTERN')).toBe("Brown 'Charlie' Charles");
+    });
+
+    it('should format name with middle name in eastern order', () => {
+      expect(formatPersonName('John', 'Doe', 'Michael', null, null, 'EASTERN')).toBe('Doe John Michael');
+    });
+
+    it('should format name with second last name in eastern order', () => {
+      expect(formatPersonName('Matias', 'Godoy', null, 'Biedma', null, 'EASTERN')).toBe('Godoy Biedma Matias');
+    });
+
+    it('should format complete name in eastern order', () => {
+      expect(formatPersonName('Matias', 'Godoy', 'Alejandro', 'Biedma', 'Matto', 'EASTERN')).toBe("Godoy Biedma 'Matto' Matias Alejandro");
+    });
+
+    it('should default to western order when nameOrder is omitted', () => {
+      expect(formatPersonName('John', 'Smith')).toBe('John Smith');
+    });
+
+    it('should handle western order explicitly', () => {
+      expect(formatPersonName('John', 'Smith', null, null, null, 'WESTERN')).toBe('John Smith');
+    });
+  });
+
   describe('formatFullName', () => {
     it('should format person object with all fields', () => {
       const person = { name: 'John', surname: 'Doe', nickname: 'Johnny' };
@@ -121,6 +155,29 @@ describe('nameUtils', () => {
     });
   });
 
+  describe('formatFullName - eastern order', () => {
+    it('should format person in eastern order', () => {
+      const person = { name: 'Taro', surname: 'Tanaka' };
+      expect(formatFullName(person, 'EASTERN')).toBe('Tanaka Taro');
+    });
+
+    it('should format person with all fields in eastern order', () => {
+      const person = {
+        name: 'Matias',
+        surname: 'Godoy',
+        middleName: 'Alejandro',
+        secondLastName: 'Biedma',
+        nickname: 'Matto',
+      };
+      expect(formatFullName(person, 'EASTERN')).toBe("Godoy Biedma 'Matto' Matias Alejandro");
+    });
+
+    it('should default to western when nameOrder is omitted', () => {
+      const person = { name: 'John', surname: 'Smith' };
+      expect(formatFullName(person)).toBe('John Smith');
+    });
+  });
+
   describe('formatGraphName', () => {
     it('should format name only', () => {
       const person = { name: 'John' };
@@ -166,6 +223,74 @@ describe('nameUtils', () => {
     it('should handle nickname without surname', () => {
       const person = { name: 'John', surname: null, nickname: 'Johnny' };
       expect(formatGraphName(person)).toBe('Johnny');
+    });
+  });
+
+  describe('formatGraphName - eastern order', () => {
+    it('should format graph name in eastern order', () => {
+      const person = { name: 'Taro', surname: 'Tanaka' };
+      expect(formatGraphName(person, 'EASTERN')).toBe('Tanaka Taro');
+    });
+
+    it('should use nickname in eastern order', () => {
+      const person = { name: 'Matias', surname: 'Godoy', nickname: 'Matto' };
+      expect(formatGraphName(person, 'EASTERN')).toBe('Godoy Matto');
+    });
+
+    it('should handle no surname in eastern order', () => {
+      const person = { name: 'Taro' };
+      expect(formatGraphName(person, 'EASTERN')).toBe('Taro');
+    });
+
+    it('should default to western when nameOrder is omitted', () => {
+      const person = { name: 'John', surname: 'Doe' };
+      expect(formatGraphName(person)).toBe('John Doe');
+    });
+  });
+
+  describe('CJK name handling (no spaces)', () => {
+    it('should omit spaces for Chinese names in eastern order', () => {
+      expect(formatPersonName('龙', '成', null, null, null, 'EASTERN')).toBe('成龙');
+    });
+
+    it('should omit spaces for Japanese names in eastern order', () => {
+      expect(formatPersonName('太郎', '田中', null, null, null, 'EASTERN')).toBe('田中太郎');
+    });
+
+    it('should omit spaces for Korean names in eastern order', () => {
+      expect(formatPersonName('철수', '김', null, null, null, 'EASTERN')).toBe('김철수');
+    });
+
+    it('should keep spaces for romanized names in eastern order', () => {
+      expect(formatPersonName('Taro', 'Tanaka', null, null, null, 'EASTERN')).toBe('Tanaka Taro');
+    });
+
+    it('should keep spaces for mixed CJK and Latin names', () => {
+      expect(formatPersonName('Taro', '田中', null, null, null, 'EASTERN')).toBe('田中 Taro');
+    });
+
+    it('should omit spaces for CJK names with middle name', () => {
+      expect(formatPersonName('太郎', '田中', '次郎', null, null, 'EASTERN')).toBe('田中太郎次郎');
+    });
+
+    it('should omit spaces for CJK formatFullName', () => {
+      const person = { name: '太郎', surname: '田中' };
+      expect(formatFullName(person, 'EASTERN')).toBe('田中太郎');
+    });
+
+    it('should omit spaces for CJK formatGraphName', () => {
+      const person = { name: '太郎', surname: '田中' };
+      expect(formatGraphName(person, 'EASTERN')).toBe('田中太郎');
+    });
+
+    it('should omit spaces for CJK formatGraphName with nickname', () => {
+      const person = { name: '太郎', surname: '田中', nickname: 'たろちゃん' };
+      expect(formatGraphName(person, 'EASTERN')).toBe('田中たろちゃん');
+    });
+
+    it('should keep spaces for CJK names in western order', () => {
+      const person = { name: '太郎', surname: '田中' };
+      expect(formatFullName(person)).toBe('太郎 田中');
     });
   });
 });

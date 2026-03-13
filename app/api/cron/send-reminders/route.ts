@@ -66,6 +66,7 @@ export const GET = withLogging(async function GET(request: Request) {
                 email: true,
                 dateFormat: true,
                 language: true,
+                nameOrder: true,
               },
             },
           },
@@ -90,7 +91,7 @@ export const GET = withLogging(async function GET(request: Request) {
         const { person } = importantDate;
         const userEmail = person.user.email;
         const userLanguage = (person.user.language as 'en' | 'es-ES') || 'en';
-        const personName = formatFullName(person);
+        const personName = formatFullName(person, person.user.nameOrder);
         const formattedDate = formatDateForEmail(
           importantDate.date,
           person.user.dateFormat,
@@ -141,6 +142,7 @@ export const GET = withLogging(async function GET(request: Request) {
             email: true,
             dateFormat: true,
             language: true,
+            nameOrder: true,
           },
         },
       },
@@ -152,7 +154,7 @@ export const GET = withLogging(async function GET(request: Request) {
 
       if (shouldSend) {
         const userLanguage = (person.user.language as 'en' | 'es-ES') || 'en';
-        const personName = formatFullName(person);
+        const personName = formatFullName(person, person.user.nameOrder);
         const lastContactFormatted = person.lastContact
           ? formatDateForEmail(person.lastContact, person.user.dateFormat, userLanguage)
           : null;

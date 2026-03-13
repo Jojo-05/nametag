@@ -5,6 +5,7 @@ const mocks = vi.hoisted(() => ({
   personFindUnique: vi.fn(),
   personFindMany: vi.fn(),
   relationshipFindMany: vi.fn(),
+  userFindUnique: vi.fn(),
 }));
 
 // Mock Prisma
@@ -16,6 +17,9 @@ vi.mock('../../lib/prisma', () => ({
     },
     relationship: {
       findMany: mocks.relationshipFindMany,
+    },
+    user: {
+      findUnique: mocks.userFindUnique,
     },
   },
 }));
@@ -35,6 +39,7 @@ import { GET } from '../../app/api/people/[id]/orphans/route';
 describe('People Orphans API', () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    mocks.userFindUnique.mockResolvedValue({ nameOrder: 'WESTERN' });
   });
 
   describe('GET /api/people/[id]/orphans', () => {

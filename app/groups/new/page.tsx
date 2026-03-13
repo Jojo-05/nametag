@@ -20,6 +20,13 @@ export default async function NewGroupPage() {
   const usageCheck = await canCreateResource(session.user.id, 'groups');
   const tierName = TIER_INFO[usageCheck.tier].name;
 
+  // Fetch user's name order preference
+  const user = await prisma.user.findUnique({
+    where: { id: session.user.id },
+    select: { nameOrder: true },
+  });
+  const nameOrder = user?.nameOrder || 'WESTERN';
+
   // Fetch available people to add to the group
   const availablePeople = await prisma.person.findMany({
     where: {
@@ -62,7 +69,7 @@ export default async function NewGroupPage() {
             />
           ) : (
             <div className="bg-surface shadow rounded-lg p-6">
-              <GroupForm mode="create" availablePeople={availablePeople} />
+              <GroupForm mode="create" availablePeople={availablePeople} nameOrder={nameOrder} />
             </div>
           )}
         </div>

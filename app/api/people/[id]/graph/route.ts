@@ -126,15 +126,16 @@ export const GET = withAuth(async (_request, session, context) => {
     const edges: GraphEdge[] = [];
     const nodeIds = new Set<string>();
 
-    // Add center node (the person we're viewing)
-    nodes.push(personToGraphNode(person, true));
-    nodeIds.add(person.id);
-
-    // Fetch user photo
+    // Fetch user photo and name order preference
     const user = await prisma.user.findUnique({
       where: { id: session.user.id },
-      select: { photo: true },
+      select: { photo: true, nameOrder: true },
     });
+    const nameOrder = user?.nameOrder;
+
+    // Add center node (the person we're viewing)
+    nodes.push(personToGraphNode(person, true, nameOrder));
+    nodeIds.add(person.id);
 
     // Add user as a node
     const userId = `user-${session.user.id}`;
@@ -146,7 +147,7 @@ export const GET = withAuth(async (_request, session, context) => {
 
     // Add related people as nodes
     person.relationshipsFrom.forEach((rel) => {
-      nodes.push(personToGraphNode(rel.relatedPerson));
+      nodes.push(personToGraphNode(rel.relatedPerson, false, nameOrder));
       nodeIds.add(rel.relatedPersonId);
 
       // If the related person has direct relationship to the user, add them

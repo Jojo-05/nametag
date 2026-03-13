@@ -20,6 +20,7 @@ interface PersonAutocompleteProps {
   required?: boolean;
   onCreateNew?: (searchTerm: string) => void;
   highlightPersonId?: string;
+  nameOrder?: 'WESTERN' | 'EASTERN';
 }
 
 export default function PersonAutocomplete({
@@ -30,6 +31,7 @@ export default function PersonAutocomplete({
   required = false,
   onCreateNew,
   highlightPersonId,
+  nameOrder,
 }: PersonAutocompleteProps) {
   const t = useTranslations('people');
   const [searchTerm, setSearchTerm] = useState('');
@@ -40,7 +42,7 @@ export default function PersonAutocomplete({
 
   // Get the selected person's name
   const selectedPerson = people.find((p) => p.id === value);
-  const displayValue = selectedPerson ? formatFullName(selectedPerson) : searchTerm;
+  const displayValue = selectedPerson ? formatFullName(selectedPerson, nameOrder) : searchTerm;
 
   // Filter people based on search term - search in name, surname, and nickname
   const filteredPeople = filterPeople(people, searchTerm, ['name', 'surname', 'nickname']);
@@ -78,7 +80,7 @@ export default function PersonAutocomplete({
   };
 
   const handleSelect = (person: Person) => {
-    onChange(person.id, formatFullName(person));
+    onChange(person.id, formatFullName(person, nameOrder));
     setSearchTerm('');
     setIsOpen(false);
     inputRef.current?.blur();
@@ -169,7 +171,7 @@ export default function PersonAutocomplete({
             >
               <div className="text-foreground">
                 <span className={person.id === highlightPersonId ? 'font-bold' : ''}>
-                  {formatFullName(person)}
+                  {formatFullName(person, nameOrder)}
                 </span>
                 {person.id === highlightPersonId && (
                   <span className="font-normal"> {t('youLabel')}</span>

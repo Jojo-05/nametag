@@ -51,6 +51,7 @@ interface PeopleListClientProps {
   dateFormat: DateFormat;
   availableGroups: Group[];
   relationshipTypes: RelationshipType[];
+  nameOrder?: 'WESTERN' | 'EASTERN';
   translations: {
     surname: string;
     nickname: string;
@@ -85,6 +86,7 @@ export default function PeopleListClient({
   dateFormat,
   availableGroups,
   relationshipTypes,
+  nameOrder,
   translations: tt,
   commonTranslations: tc,
 }: PeopleListClientProps) {
@@ -330,7 +332,7 @@ export default function PeopleListClient({
                     <td className="w-[32px] py-4 px-2">
                       <PersonAvatar
                         personId={person.id}
-                        name={formatFullName(person)}
+                        name={formatFullName(person, nameOrder)}
                         photo={person.photo}
                         size={32}
                       />

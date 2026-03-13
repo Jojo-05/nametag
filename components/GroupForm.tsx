@@ -24,6 +24,7 @@ interface GroupFormProps {
   };
   mode: 'create' | 'edit';
   availablePeople?: Person[]; // Only used in create mode
+  nameOrder?: 'WESTERN' | 'EASTERN';
 }
 
 const PRESET_COLORS = [
@@ -37,7 +38,7 @@ const PRESET_COLORS = [
   '#14B8A6', // Teal
 ];
 
-export default function GroupForm({ group, mode, availablePeople = [] }: GroupFormProps) {
+export default function GroupForm({ group, mode, availablePeople = [], nameOrder }: GroupFormProps) {
   const t = useTranslations('groups.form');
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
@@ -192,7 +193,7 @@ export default function GroupForm({ group, mode, availablePeople = [] }: GroupFo
             selectedItems={selectedPeople}
             availableItems={availablePeople.map(person => ({
               id: person.id,
-              label: formatFullName(person),
+              label: formatFullName(person, nameOrder),
             }))}
             onAdd={(item) => setSelectedPeople([...selectedPeople, item])}
             onRemove={(itemId) => setSelectedPeople(selectedPeople.filter(p => p.id !== itemId))}

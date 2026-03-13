@@ -28,6 +28,7 @@ interface PersonActionsMenuProps {
   person: PersonWithRelations;
   hasCardDavSync: boolean;
   allPeople?: PersonForSearch[];
+  nameOrder?: 'WESTERN' | 'EASTERN';
 }
 
 interface Orphan {
@@ -41,6 +42,7 @@ export default function PersonActionsMenu({
   person,
   hasCardDavSync,
   allPeople = [],
+  nameOrder,
 }: PersonActionsMenuProps) {
   const t = useTranslations('people');
   const tDup = useTranslations('people.duplicates');
@@ -505,6 +507,7 @@ export default function PersonActionsMenu({
             value={mergeTargetId}
             onChange={(id) => handleMergeSelect(id)}
             placeholder={tMerge('searchPerson')}
+            nameOrder={nameOrder}
           />
         </div>
       </Modal>

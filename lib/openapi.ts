@@ -8,7 +8,7 @@ import {
   createRelationshipSchema, updateRelationshipSchema,
   createRelationshipTypeSchema, updateRelationshipTypeSchema,
   updateProfileSchema, updatePasswordSchema,
-  updateThemeSchema, updateDateFormatSchema,
+  updateThemeSchema, updateDateFormatSchema, updateNameOrderSchema,
   importDataSchema, createImportantDateSchema, updateImportantDateSchema,
   mergePersonSchema,
 } from './validations';
@@ -1512,6 +1512,21 @@ export function generateOpenAPISpec(): OpenAPISpec {
           requestBody: zodBody(updateDateFormatSchema),
           responses: {
             '200': jsonResponse('Date format updated', {
+              type: 'object',
+              properties: { user: { $ref: '#/components/schemas/UserProfile' } },
+            }),
+            '401': ref401(),
+          },
+        },
+      },
+      '/api/user/name-order': {
+        put: {
+          tags: ['User Settings'],
+          summary: 'Update name display order preference',
+          security: [{ session: [] }],
+          requestBody: zodBody(updateNameOrderSchema),
+          responses: {
+            '200': jsonResponse('Name order updated', {
               type: 'object',
               properties: { user: { $ref: '#/components/schemas/UserProfile' } },
             }),

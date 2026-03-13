@@ -23,7 +23,7 @@ export default async function GroupDetailsPage({
 
   const { id } = await params;
 
-  const [group, allPeople] = await Promise.all([
+  const [group, allPeople, user] = await Promise.all([
     prisma.group.findUnique({
       where: {
         id,
@@ -65,7 +65,12 @@ export default async function GroupDetailsPage({
         name: 'asc',
       },
     }),
+    prisma.user.findUnique({
+      where: { id: session.user.id },
+      select: { nameOrder: true },
+    }),
   ]);
+  const nameOrder = user?.nameOrder || 'WESTERN';
 
   if (!group) {
     notFound();
@@ -131,6 +136,7 @@ export default async function GroupDetailsPage({
                 groupName={group.name}
                 currentMembers={currentMembers}
                 availablePeople={allPeople}
+                nameOrder={nameOrder}
               />
             </div>
           </div>

@@ -28,7 +28,7 @@ export default async function NewPersonPage({
     canEnableReminder(session.user.id),
     prisma.user.findUnique({
       where: { id: session.user.id },
-      select: { dateFormat: true },
+      select: { dateFormat: true, nameOrder: true },
     }),
     prisma.cardDavConnection.findFirst({
       where: { userId: session.user.id },
@@ -37,6 +37,7 @@ export default async function NewPersonPage({
   ]);
 
   const dateFormat = user?.dateFormat || 'MDY';
+  const nameOrder = user?.nameOrder || 'WESTERN';
 
   const [groups, relationshipTypes, people] = await Promise.all([
     prisma.group.findMany({
@@ -119,6 +120,7 @@ export default async function NewPersonPage({
                 initialKnownThrough={params.knownThrough}
                 initialRelationshipType={params.relationshipType}
                 hasCardDavConnection={!!cardDavConnection}
+                nameOrder={nameOrder}
                 reminderLimit={{
                   canCreate: reminderCheck.allowed,
                   current: reminderCheck.current,
