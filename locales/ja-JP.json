@@ -972,6 +972,7 @@
         "cancel": "キャンセル",
         "edit": "編集",
         "remove": "削除",
+        "typePlaceholder": "種類",
         "labelPlaceholder": "ラベル（例：本社）",
         "latitudePlaceholder": "緯度（-90〜90）",
         "longitudePlaceholder": "経度（-180〜180）",

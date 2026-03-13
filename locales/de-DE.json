@@ -972,6 +972,7 @@
         "cancel": "Abbrechen",
         "edit": "Bearbeiten",
         "remove": "Entfernen",
+        "typePlaceholder": "Typ",
         "labelPlaceholder": "Label (z. B. Hauptbüro)",
         "latitudePlaceholder": "Breitengrad (-90 bis 90)",
         "longitudePlaceholder": "Längengrad (-180 bis 180)",

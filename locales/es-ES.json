@@ -972,6 +972,7 @@
         "cancel": "Cancelar",
         "edit": "Editar",
         "remove": "Eliminar",
+        "typePlaceholder": "Tipo",
         "labelPlaceholder": "Etiqueta (ej. Oficina principal)",
         "latitudePlaceholder": "Latitud (-90 a 90)",
         "longitudePlaceholder": "Longitud (-180 a 180)",

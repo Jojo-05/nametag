@@ -972,6 +972,7 @@
         "cancel": "Avbryt",
         "edit": "Rediger",
         "remove": "Fjern",
+        "typePlaceholder": "Type",
         "labelPlaceholder": "Etikett (f.eks. Hovedkontor)",
         "latitudePlaceholder": "Breddegrad (-90 til 90)",
         "longitudePlaceholder": "Lengdegrad (-180 til 180)",

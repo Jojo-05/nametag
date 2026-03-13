@@ -972,6 +972,7 @@
                 "cancel": "取消",
                 "edit": "编辑",
                 "remove": "移除",
+                "typePlaceholder": "类型",
                 "labelPlaceholder": "标签（例如：主要办公室）",
                 "latitudePlaceholder": "纬度 (-90 至 90)",
                 "longitudePlaceholder": "经度 (-180 至 180)",
