@@ -6,6 +6,27 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+## [0.37.0](https://github.com/mattogodoy/nametag/compare/v0.36.0...v0.37.0) (2026-03-13)
+
+
+### Features
+
+* add eastern name order support to formatting functions ([1b1c452](https://github.com/mattogodoy/nametag/commit/1b1c4527f1234134a0b6ad8985874883009e006d))
+* add name order i18n translations for all 6 locales ([570b674](https://github.com/mattogodoy/nametag/commit/570b6745457a313d8003c6840328e0adffedc841))
+* add name order selector to appearance settings ([3d42f64](https://github.com/mattogodoy/nametag/commit/3d42f6404c17ef4b50127350d9082c4fb7713e73))
+* add name-order API route and validation schema ([349cad3](https://github.com/mattogodoy/nametag/commit/349cad390344ac721b8067e439259fd0298c9820))
+* add NameOrder enum and nameOrder field to User model ([42aef63](https://github.com/mattogodoy/nametag/commit/42aef63230c90eab0cafc59474857182d4f2a010))
+* auto-detect CJK characters to omit spaces in eastern name order ([b97aa17](https://github.com/mattogodoy/nametag/commit/b97aa170155112d70161d5ea7c82be338dada62a))
+* Eastern name order support ([a48b89a](https://github.com/mattogodoy/nametag/commit/a48b89a5adc8bddfd28d48714ef5a4edd4d46dc2))
+* thread nameOrder through all client-side call sites ([4ecc303](https://github.com/mattogodoy/nametag/commit/4ecc3036345d17ffb516ffc2fa62438341e4fac4))
+* thread nameOrder through server-side call sites ([a5c791e](https://github.com/mattogodoy/nametag/commit/a5c791e45ee4b008aba17dd88602e71c3d06a19d))
+* update test reminder script with nameOrder param ([bd27be2](https://github.com/mattogodoy/nametag/commit/bd27be2fcf5edeb397c3dd818d01051706bacb61))
+
+
+### Bug Fixes
+
+* use formatFullName for title and full name on person details page ([ef575f3](https://github.com/mattogodoy/nametag/commit/ef575f3138ee02363e595b18dc890f64d9d2ae00))
+
 ## [0.36.0](https://github.com/mattogodoy/nametag/compare/v0.35.0...v0.36.0) (2026-03-11)
 
 
