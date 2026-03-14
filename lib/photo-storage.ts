@@ -46,17 +46,64 @@ const EXT_TO_MIME: Record<string, string> = {
 };
 
 /**
- * Get the base path for photo storage
+ * Validate that a storage path is absolute and contains no traversal sequences.
+ * Returns the resolved path on success, throws on invalid input.
+ */
+export function validateStoragePath(storagePath: string): string {
+  if (!path.isAbsolute(storagePath)) {
+    throw new Error('PHOTO_STORAGE_PATH must be an absolute path');
+  }
+  if (storagePath.includes('..')) {
+    throw new Error('PHOTO_STORAGE_PATH contains invalid path traversal');
+  }
+  return path.resolve(storagePath);
+}
+
+/**
+ * Validate that a file path stays within the expected base directory.
+ * Throws if the path contains null bytes or escapes the base.
+ */
+export function validateFilePath(filePath: string, basePath: string): void {
+  if (filePath.includes('\x00')) {
+    throw new Error('File path contains null bytes');
+  }
+  const resolved = path.resolve(filePath);
+  const resolvedBase = path.resolve(basePath);
+  if (!resolved.startsWith(resolvedBase + path.sep) && resolved !== resolvedBase) {
+    throw new Error('File path attempts to escape storage directory');
+  }
+}
+
+let _validatedPath: string | null = null;
+
+/**
+ * Reset the cached storage path. Intended for testing only.
+ */
+export function resetPhotoStorageCache(): void {
+  _validatedPath = null;
+}
+
+/**
+ * Get the base path for photo storage.
+ * Validates and caches the result on first call.
  */
 export function getPhotoStoragePath(): string {
-  return process.env.PHOTO_STORAGE_PATH || './data/photos';
+  if (!_validatedPath) {
+    const configuredPath = process.env.PHOTO_STORAGE_PATH || path.resolve('./data/photos');
+    _validatedPath = validateStoragePath(
+      path.isAbsolute(configuredPath) ? configuredPath : path.resolve(configuredPath)
+    );
+  }
+  return _validatedPath;
 }
 
 /**
  * Ensure the user's photo directory exists
  */
 export async function ensureUserPhotoDir(userId: string): Promise<string> {
-  const dirPath = path.join(getPhotoStoragePath(), userId);
+  const basePath = getPhotoStoragePath();
+  const dirPath = path.join(basePath, userId);
+  validateFilePath(dirPath, basePath);
   await fs.mkdir(dirPath, { recursive: true });
   return dirPath;
 }
@@ -239,6 +286,7 @@ export async function savePhoto(
     const ext = hasAlpha ? 'png' : 'jpg';
     const filename = `${personId}.${ext}`;
     const filePath = path.join(dirPath, filename);
+    validateFilePath(filePath, getPhotoStoragePath());
 
     await atomicWrite(filePath, data);
 
@@ -267,6 +315,7 @@ export async function savePhotoFromBuffer(
   const ext = hasAlpha ? 'png' : 'jpg';
   const filename = `${personId}.${ext}`;
   const filePath = path.join(dirPath, filename);
+  validateFilePath(filePath, getPhotoStoragePath());
 
   await atomicWrite(filePath, data);
 
@@ -278,7 +327,9 @@ export async function savePhotoFromBuffer(
  */
 export async function deletePhoto(userId: string, filename: string): Promise<void> {
   try {
-    const filePath = path.join(getPhotoStoragePath(), userId, filename);
+    const basePath = getPhotoStoragePath();
+    const filePath = path.join(basePath, userId, filename);
+    validateFilePath(filePath, basePath);
     await fs.unlink(filePath);
   } catch (error) {
     // Ignore ENOENT (file already gone)
@@ -293,14 +344,18 @@ export async function deletePhoto(userId: string, filename: string): Promise<voi
  */
 export async function deletePersonPhotos(userId: string, personId: string): Promise<void> {
   try {
-    const dirPath = path.join(getPhotoStoragePath(), userId);
+    const basePath = getPhotoStoragePath();
+    const dirPath = path.join(basePath, userId);
+    validateFilePath(dirPath, basePath);
     const files = await fs.readdir(dirPath).catch(() => []);
 
     for (const file of files) {
       // Match personId.ext pattern
       const baseName = path.parse(file).name;
       if (baseName === personId) {
-        await fs.unlink(path.join(dirPath, file));
+        const unlinkPath = path.join(dirPath, file);
+        validateFilePath(unlinkPath, basePath);
+        await fs.unlink(unlinkPath);
       }
     }
   } catch (error) {
@@ -322,7 +377,9 @@ export async function readPhotoForExport(
   if (!isPhotoFilename(photo)) return null;
 
   try {
-    const filePath = path.join(getPhotoStoragePath(), userId, photo);
+    const basePath = getPhotoStoragePath();
+    const filePath = path.join(basePath, userId, photo);
+    validateFilePath(filePath, basePath);
     const buffer = await fs.readFile(filePath);
     const ext = path.extname(photo).slice(1).toLowerCase();
     const mimeType = EXT_TO_MIME[ext] || 'image/jpeg';
@@ -346,7 +403,9 @@ export async function readPhotoFile(
   if (!isPhotoFilename(photo)) return null;
 
   try {
-    const filePath = path.join(getPhotoStoragePath(), userId, photo);
+    const basePath = getPhotoStoragePath();
+    const filePath = path.join(basePath, userId, photo);
+    validateFilePath(filePath, basePath);
     const buffer = await fs.readFile(filePath);
     const ext = path.extname(photo).slice(1).toLowerCase();
     const mimeType = EXT_TO_MIME[ext] || 'image/jpeg';
