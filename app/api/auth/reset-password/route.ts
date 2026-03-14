@@ -5,6 +5,7 @@ import { resetPasswordSchema, validateRequest } from '@/lib/validations';
 import { checkRateLimit } from '@/lib/rate-limit';
 import { handleApiError, parseRequestBody, withLogging } from '@/lib/api-utils';
 import { logger } from '@/lib/logger';
+import { hashToken } from '@/lib/token-hash';
 
 export const POST = withLogging(async function POST(request: Request) {
   // Check rate limit
@@ -26,7 +27,7 @@ export const POST = withLogging(async function POST(request: Request) {
     // Find user with valid token
     const user = await prisma.user.findFirst({
       where: {
-        passwordResetToken: token,
+        passwordResetToken: hashToken(token),
         passwordResetExpires: {
           gt: new Date(),
         },

@@ -830,6 +830,32 @@ describe('Auth API', () => {
       expect(mocks.sendEmail).not.toHaveBeenCalled();
     });
 
+    it('should store a hashed reset token, not the raw token', async () => {
+      mocks.userFindUnique.mockResolvedValue({
+        id: 'user-123',
+        passwordResetSentAt: null,
+      });
+      mocks.userUpdate.mockResolvedValue({});
+
+      const request = new Request('http://localhost/api/auth/forgot-password', {
+        method: 'POST',
+        body: JSON.stringify({ email: 'test@example.com' }),
+        headers: { 'content-type': 'application/json' },
+      });
+
+      await forgotPassword(request);
+
+      const updateCall = mocks.userUpdate.mock.calls[0][0];
+      const storedToken = updateCall.data.passwordResetToken;
+      // Token should be a 64-char hex string (SHA-256 output)
+      expect(storedToken).toMatch(/^[a-f0-9]{64}$/);
+      // The email should contain the raw token, not the hash
+      const emailCall = mocks.sendEmail.mock.calls[0];
+      const emailBody = JSON.stringify(emailCall);
+      // The stored token should NOT appear in the email (email has the raw token)
+      expect(emailBody).not.toContain(storedToken);
+    });
+
     it('should allow reset after cooldown expires', async () => {
       const oldTime = new Date(Date.now() - 5 * 60 * 1000); // 5 minutes ago
       mocks.userFindUnique.mockResolvedValue({
