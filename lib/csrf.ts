@@ -32,11 +32,9 @@ export function validateOrigin(request: Request): boolean {
     return origin === expectedOrigin;
   }
 
-  if (referer) {
-    try {
-      return new URL(referer).origin === expectedOrigin;
-    } catch {
-      return false;
-    }
+  try {
+    return new URL(referer!).origin === expectedOrigin;
+  } catch {
+    return false;
   }
 }
