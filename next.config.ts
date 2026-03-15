@@ -61,13 +61,14 @@ const nextConfig: NextConfig = {
             value: [
               "default-src 'self'",
               // Next.js requires 'unsafe-inline' for hydration scripts.
-              // Nonce-based CSP is the proper solution but requires middleware integration.
+              // Turbopack dev server also requires 'unsafe-eval' for HMR — only added in development.
+              // Nonce-based CSP is the proper long-term solution.
               // See: https://nextjs.org/docs/app/building-your-application/configuring/content-security-policy
-              "script-src 'self' 'unsafe-inline'",
+              `script-src 'self' 'unsafe-inline'${process.env.NODE_ENV === 'development' ? " 'unsafe-eval'" : ''}`,
               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
               "font-src 'self' https://fonts.gstatic.com",
               "img-src 'self' data: blob: https:",
-              "connect-src 'self'",
+              `connect-src 'self'${process.env.NODE_ENV === 'development' ? ' ws://localhost:*' : ''}`,
               "frame-ancestors 'none'",
               "base-uri 'self'",
               "form-action 'self'",
