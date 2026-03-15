@@ -67,6 +67,9 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 # Standalone output includes public, but we copy again to ensure all assets are present
 COPY --from=builder --chown=nextjs:nodejs /app/public ./public
 
+# Copy locale files (dynamic imports in i18n.ts aren't traced by standalone build)
+COPY --from=builder --chown=nextjs:nodejs /app/locales ./locales
+
 # Install Prisma CLI for migrations (as root before switching users)
 # Note: We only install prisma (not @prisma/client which is already in standalone)
 RUN --mount=type=cache,target=/root/.npm \
