@@ -6,11 +6,16 @@ import { checkRateLimit } from '@/lib/rate-limit';
 import { handleApiError, parseRequestBody, normalizeEmail, withLogging } from '@/lib/api-utils';
 import { getAppUrl } from '@/lib/env';
 import { generateToken, hashToken } from '@/lib/token-hash';
+import { validateOrigin } from '@/lib/csrf';
 
 const TOKEN_EXPIRY_HOURS = 24;
 const RESEND_COOLDOWN_MINUTES = 2;
 
 export const POST = withLogging(async function POST(request: Request) {
+  if (!validateOrigin(request)) {
+    return NextResponse.json({ error: 'Invalid request origin' }, { status: 403 });
+  }
+
   // Check rate limit
   const rateLimitResponse = checkRateLimit(request, 'resendVerification');
   if (rateLimitResponse) {

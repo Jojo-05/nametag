@@ -4,8 +4,13 @@ import { handleApiError, parseRequestBody, withLogging } from '@/lib/api-utils';
 import { logger } from '@/lib/logger';
 import { hashToken } from '@/lib/token-hash';
 import { checkRateLimit } from '@/lib/rate-limit';
+import { validateOrigin } from '@/lib/csrf';
 
 export const POST = withLogging(async function POST(request: Request) {
+  if (!validateOrigin(request)) {
+    return NextResponse.json({ error: 'Invalid request origin' }, { status: 403 });
+  }
+
   try {
     const rateLimitResponse = checkRateLimit(request, 'verifyEmail');
     if (rateLimitResponse) return rateLimitResponse;

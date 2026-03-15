@@ -11,10 +11,15 @@ import { createFreeSubscription } from '@/lib/billing';
 import { createPreloadedRelationshipTypes } from '@/lib/relationship-types';
 import { isFeatureEnabled } from '@/lib/features';
 import { getAppUrl } from '@/lib/env';
+import { validateOrigin } from '@/lib/csrf';
 
 const TOKEN_EXPIRY_HOURS = 24;
 
 export const POST = withLogging(async function POST(request: Request) {
+  if (!validateOrigin(request)) {
+    return NextResponse.json({ error: 'Invalid request origin' }, { status: 403 });
+  }
+
   // Check rate limit (async with Redis)
   const rateLimitResponse = await checkRateLimit(request, 'register');
   if (rateLimitResponse) {

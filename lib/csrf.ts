@@ -2,6 +2,11 @@ import { getAppUrl } from '@/lib/env';
 
 const SAFE_METHODS = new Set(['GET', 'HEAD', 'OPTIONS']);
 
+/**
+ * Validates that the request originates from the same origin as the application.
+ * Checks the Origin and Referer headers against the configured app URL to prevent
+ * cross-site request forgery on state-changing (non-GET/HEAD/OPTIONS) requests.
+ */
 export function validateOrigin(request: Request): boolean {
   if (SAFE_METHODS.has(request.method)) {
     return true;
@@ -34,6 +39,4 @@ export function validateOrigin(request: Request): boolean {
       return false;
     }
   }
-
-  return true;
 }
