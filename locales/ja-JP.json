@@ -880,7 +880,14 @@
         "noDatesYet": "まだ重要な日付は追加されていません。",
         "remindOnceShort": "一度リマインド",
         "remindEveryShort": "{interval} {unit}ごとにリマインド",
-        "reminderLimitReached": "リマインダーの制限に達しました（{limit}）。アップグレードしてさらに追加してください。"
+        "reminderLimitReached": "リマインダーの制限に達しました（{limit}）。アップグレードしてさらに追加してください。",
+        "types": {
+          "birthday": "誕生日",
+          "anniversary": "記念日",
+          "nameday": "名前の日",
+          "memorial": "追悼日",
+          "other": "その他"
+        }
       },
       "phones": {
         "label": "電話番号",

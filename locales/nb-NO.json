@@ -880,7 +880,14 @@
         "noDatesYet": "Ingen viktige datoer lagt til ennå.",
         "remindOnceShort": "Minn én gang",
         "remindEveryShort": "Minn hver {interval} {unit}",
-        "reminderLimitReached": "Påminnelsesgrensen er nådd ({limit}). Oppgrader abonnementet ditt for å legge til flere."
+        "reminderLimitReached": "Påminnelsesgrensen er nådd ({limit}). Oppgrader abonnementet ditt for å legge til flere.",
+        "types": {
+          "birthday": "Bursdag",
+          "anniversary": "Jubileum",
+          "nameday": "Navnedag",
+          "memorial": "Minnedag",
+          "other": "Annet"
+        }
       },
       "phones": {
         "label": "Telefonnumre",

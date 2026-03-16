@@ -880,7 +880,14 @@
         "noDatesYet": "Aún no se han añadido fechas importantes.",
         "remindOnceShort": "Recordar una vez",
         "remindEveryShort": "Recordar cada {interval} {unit}",
-        "reminderLimitReached": "Límite de recordatorios alcanzado ({limit}). Mejora tu plan para añadir más."
+        "reminderLimitReached": "Límite de recordatorios alcanzado ({limit}). Mejora tu plan para añadir más.",
+        "types": {
+          "birthday": "Cumpleaños",
+          "anniversary": "Aniversario",
+          "nameday": "Día del santo",
+          "memorial": "Memorial",
+          "other": "Otro"
+        }
       },
       "phones": {
         "label": "Números de teléfono",

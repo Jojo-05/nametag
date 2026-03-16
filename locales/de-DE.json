@@ -880,7 +880,14 @@
         "noDatesYet": "Noch keine wichtigen Termine hinzugefügt.",
         "remindOnceShort": "Einmal erinnern",
         "remindEveryShort": "Alle {interval} {unit} erinnern",
-        "reminderLimitReached": "Erinnerungslimit erreicht ({limit}). Upgrade, um mehr hinzuzufügen."
+        "reminderLimitReached": "Erinnerungslimit erreicht ({limit}). Upgrade, um mehr hinzuzufügen.",
+        "types": {
+          "birthday": "Geburtstag",
+          "anniversary": "Jahrestag",
+          "nameday": "Namenstag",
+          "memorial": "Gedenktag",
+          "other": "Andere"
+        }
       },
       "phones": {
         "label": "Telefonnummern",

@@ -880,7 +880,14 @@
         "noDatesYet": "还没有添加重要日期。",
         "remindOnceShort": "提醒一次",
         "remindEveryShort": "每 {interval} {unit} 提醒",
-        "reminderLimitReached": "已达到提醒限制（{limit}）。升级以添加更多。"
+        "reminderLimitReached": "已达到提醒限制（{limit}）。升级以添加更多。",
+        "types": {
+          "birthday": "生日",
+          "anniversary": "周年纪念",
+          "nameday": "命名日",
+          "memorial": "追悼纪念日",
+          "other": "其他"
+        }
       },
       "phones": {
         "label": "电话号码",

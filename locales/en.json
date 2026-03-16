@@ -880,7 +880,14 @@
         "noDatesYet": "No important dates added yet.",
         "remindOnceShort": "Remind once",
         "remindEveryShort": "Remind every {interval} {unit}",
-        "reminderLimitReached": "Reminder limit reached ({limit}). Upgrade to add more."
+        "reminderLimitReached": "Reminder limit reached ({limit}). Upgrade to add more.",
+        "types": {
+          "birthday": "Birthday",
+          "anniversary": "Anniversary",
+          "nameday": "Name day",
+          "memorial": "Memorial",
+          "other": "Other"
+        }
       },
       "phones": {
         "label": "Phone Numbers",
