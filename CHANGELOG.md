@@ -6,6 +6,31 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+## [0.39.0](https://github.com/mattogodoy/nametag/compare/v0.38.2...v0.39.0) (2026-03-17)
+
+
+### Features
+
+* add predefined important date type constants and display helper ([1b160b3](https://github.com/mattogodoy/nametag/commit/1b160b31c2abaf88c4c178f2c6bdae394c871d3e))
+* add predefined important date type translations for all 6 locales ([e76f694](https://github.com/mattogodoy/nametag/commit/e76f6940a2b378b15a4575e8d365dd1ff6cfc5bf))
+* add reusable ComboboxInput component for editable dropdowns ([64533ed](https://github.com/mattogodoy/nametag/commit/64533edaf44d27cb342f659810ef0c09afb6ece1))
+* add type field to important date validation schemas ([ce715dd](https://github.com/mattogodoy/nametag/commit/ce715dd742f06ad393c8fd01a3cc5acce05dfd31))
+* add type field to ImportantDate with migration backfill ([95e6eba](https://github.com/mattogodoy/nametag/commit/95e6eba46101ebfddae7d7ebedecd1dca15c05d7))
+* add type field to ImportantDateItem interface and PersonForm props ([ba2043d](https://github.com/mattogodoy/nametag/commit/ba2043d9a11c2afd4ee4160fd8bd028a2849f688))
+* pass type field through service layer, API routes, and restore endpoint ([36fe3ff](https://github.com/mattogodoy/nametag/commit/36fe3ff6ae7896362847636485a019a42339c2e5))
+* predefined important date types with combobox UI ([77bc79b](https://github.com/mattogodoy/nametag/commit/77bc79b33572a125c72f265a7ac0e9040eef8e79))
+* replace title text input with combobox in ImportantDatesManager ([30b40f7](https://github.com/mattogodoy/nametag/commit/30b40f74485ccccac1bab0e9b646da60b8a81264))
+
+
+### Bug Fixes
+
+* CardDAV import sets type field for BDAY/ANNIVERSARY roundtrip ([3ce7bd3](https://github.com/mattogodoy/nametag/commit/3ce7bd3b8c4a0e131e6fdfaea5cf00491f133a08))
+* remove partial unique index to avoid Prisma drift, enforce uniqueness in app layer ([f3a1d3c](https://github.com/mattogodoy/nametag/commit/f3a1d3cd0a91d01fc0cbb46175a5451c5d9ead58))
+* resolve lint errors in ComboboxInput (effect setState, ARIA attributes) ([5820c31](https://github.com/mattogodoy/nametag/commit/5820c318dbf9f8fed1a292ba145a6a1b04825676))
+* use getDateDisplayTitle for localized date title display across all sites ([0ba0bef](https://github.com/mattogodoy/nametag/commit/0ba0bef32ccd6c21ca018314183d99af30405c68))
+* use type field for CardDAV BDAY/ANNIVERSARY export (language-proof) ([b494cfa](https://github.com/mattogodoy/nametag/commit/b494cfafb08babed69d5face2d14bd5e6170f3a9))
+* widen formatDateForEmail locale type to support all locales ([c5148cb](https://github.com/mattogodoy/nametag/commit/c5148cb30fb8335c0525bc1487b88cdff418a1ff))
+
 ## [0.38.2](https://github.com/mattogodoy/nametag/compare/v0.38.1...v0.38.2) (2026-03-15)
 
 
