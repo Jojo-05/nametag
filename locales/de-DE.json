@@ -398,13 +398,13 @@
         "savingConnection": "Verbindung wird gespeichert..."
       },
       "errors": {
-        "authFailed": "Authentication failed. Please check your username and password. For Google and iCloud, make sure you are using an app-specific password.",
-        "networkError": "Network error. Please check your internet connection and server URL.",
-        "serverError": "The CardDAV server is experiencing issues. Please try again later.",
-        "rateLimited": "Too many requests. Please wait a moment and try again.",
-        "malformedData": "Invalid data received from server. The contact may be corrupted.",
-        "notFound": "The requested resource was not found. Please check your server URL.",
-        "unknown": "An unexpected error occurred. Please try again or contact support."
+        "authFailed": "Authentifizierung fehlgeschlagen. Bitte überprüfe deinen Benutzernamen und dein Passwort. Stelle bei Google und iCloud sicher, dass du ein app-spezifisches Passwort verwendest.",
+        "networkError": "Netzwerkfehler. Bitte überprüfe deine Internetverbindung und die Server-URL.",
+        "serverError": "Beim CardDAV-Server treten derzeit Probleme auf. Bitte versuche es später erneut.",
+        "rateLimited": "Zu viele Anfragen. Bitte warte einen Moment und versuche es erneut.",
+        "malformedData": "Ungültige Daten vom Server empfangen. Der Kontakt ist möglicherweise beschädigt.",
+        "notFound": "Die angeforderte Ressource wurde nicht gefunden. Bitte überprüfe deine Server-URL.",
+        "unknown": "Ein unerwarteter Fehler ist aufgetreten. Bitte versuche es erneut oder kontaktiere den Support."
       }
     },
     "billing": {
