@@ -147,7 +147,7 @@ export default function PillSelector<T extends PillItem>({
   const defaultRenderPill = (item: T, onRemoveClick: () => void) => (
     <div
       key={item.id}
-      className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 rounded-full text-sm font-medium"
+      className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-primary/10 text-primary rounded-full text-sm font-medium"
     >
       {item.color && (
         <div
@@ -162,7 +162,7 @@ export default function PillSelector<T extends PillItem>({
           onRemoveClick();
         }}
         disabled={isLoading}
-        className="hover:bg-blue-200 dark:hover:bg-blue-800 rounded-full p-0.5 transition-colors disabled:opacity-50"
+        className="hover:bg-primary/20 rounded-full p-0.5 transition-colors disabled:opacity-50"
         aria-label={`${removeAriaLabel} ${item.label}`}
       >
         <svg

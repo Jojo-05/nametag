@@ -222,7 +222,7 @@ export default function NavigationSearch() {
       )}
 
       {isOpen && !isLoading && searchTerm && results.length === 0 && (
-        <div className="absolute z-50 w-full mt-1 bg-surface border-2 border-tertiary/30 rounded-lg shadow-lg shadow-tertiary/20 p-3">
+        <div className="absolute z-50 w-full mt-1 bg-surface border border-border rounded-lg shadow-lg p-3">
           <p className="text-sm text-muted">
             {t('noResults', { searchTerm })}
           </p>
