@@ -256,7 +256,7 @@ export default function PeopleListClient({
       </div>
 
       {/* Table */}
-      <div className="bg-surface shadow-lg rounded-lg overflow-hidden border-2 border-primary/30">
+      <div className="bg-surface shadow-sm rounded-lg overflow-hidden border border-border">
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-border">
             <thead className="bg-surface-elevated">

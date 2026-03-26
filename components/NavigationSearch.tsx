@@ -170,7 +170,7 @@ export default function NavigationSearch() {
           onKeyDown={handleKeyDown}
           onFocus={handleFocus}
           placeholder={t('placeholder')}
-          className="w-full pl-9 pr-3 py-1.5 text-sm border-2 border-border rounded-lg bg-surface-elevated text-foreground placeholder-muted focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all"
+          className="w-full pl-9 pr-3 py-1.5 text-sm border border-border rounded-lg bg-surface-elevated text-foreground placeholder-muted focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-colors"
           autoComplete="off"
         />
         <svg

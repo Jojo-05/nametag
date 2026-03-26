@@ -598,7 +598,7 @@ export default function UnifiedNetworkGraph({
       <div className="relative">
         <svg
           ref={svgRef}
-          className="w-full h-[400px] sm:h-[500px] lg:h-[600px] bg-surface rounded-lg border-2 border-border"
+          className="w-full h-[400px] sm:h-[500px] lg:h-[600px] bg-surface rounded-lg border border-border"
         />
         <div className="absolute bottom-4 right-4 flex gap-2">
           <button
