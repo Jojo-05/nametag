@@ -36,6 +36,10 @@ export default async function DashboardPage() {
     }),
   ]);
 
+  // Time-of-day greeting
+  const hour = new Date().getHours();
+  const greetingKey = hour < 12 ? 'greetingMorning' : hour < 18 ? 'greetingAfternoon' : 'greetingEvening';
+
   // Helper function to format days until
   const formatDaysUntil = (days: number): string => {
     if (days === 0) return t('today');
@@ -58,9 +62,9 @@ export default async function DashboardPage() {
       <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
         <div className="px-4 py-6 sm:px-0">
           {/* Greeting */}
-          <div className="mb-10">
+          <div className="mb-8">
             <h1 className="text-2xl font-bold text-foreground">
-              {t('greeting', { name: session.user.nickname || session.user.name || '' })}
+              {t(greetingKey, { name: session.user.nickname || session.user.name || '' })}
             </h1>
           </div>
 

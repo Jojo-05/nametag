@@ -596,12 +596,14 @@
   },
   "dashboard": {
     "title": "Oversikt",
-    "greeting": "Velkommen tilbake, {name}",
+    "greetingMorning": "God morgen, {name}",
+    "greetingAfternoon": "God ettermiddag, {name}",
+    "greetingEvening": "God kveld, {name}",
     "upcomingEvents": "Kommende hendelser",
     "yourNetwork": "Nettverket ditt",
     "emptyNetwork": {
-      "title": "Nettverket ditt er tomt",
-      "description": "Begynn å bygge ditt personlige nettverk ved å legge til personer du kjenner.",
+      "title": "Alle starter et sted",
+      "description": "Legg til menneskene som betyr noe for deg og se nettverket ditt bli levende.",
       "action": "Legg til din første person"
     },
     "today": "I dag",

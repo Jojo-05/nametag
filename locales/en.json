@@ -596,13 +596,15 @@
   },
   "dashboard": {
     "title": "Dashboard",
-    "greeting": "Welcome back, {name}",
+    "greetingMorning": "Good morning, {name}",
+    "greetingAfternoon": "Good afternoon, {name}",
+    "greetingEvening": "Good evening, {name}",
     "upcomingEvents": "Upcoming Events",
     "yourNetwork": "Your Network",
     "emptyNetwork": {
-      "title": "Your network is empty",
-      "description": "Start building your personal network by adding people you know.",
-      "action": "Create your first person"
+      "title": "Everyone starts somewhere",
+      "description": "Add the people who matter to you and watch your network come to life.",
+      "action": "Add your first person"
     },
     "today": "Today",
     "tomorrow": "Tomorrow",

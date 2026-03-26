@@ -122,7 +122,7 @@ export default async function GroupsPage({
                   <Link
                     key={group.id}
                     href={`/groups/${group.id}`}
-                    className="bg-surface shadow rounded-lg p-6 hover:shadow-lg transition-shadow"
+                    className="bg-surface shadow-sm rounded-lg p-6 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200"
                   >
                     <div className="flex items-start justify-between mb-3">
                       <div className="flex-1">

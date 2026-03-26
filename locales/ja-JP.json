@@ -596,13 +596,15 @@
   },
   "dashboard": {
     "title": "ダッシュボード",
-    "greeting": "おかえりなさい、{name}",
+    "greetingMorning": "おはようございます、{name}",
+    "greetingAfternoon": "こんにちは、{name}",
+    "greetingEvening": "こんばんは、{name}",
     "upcomingEvents": "今後のイベント",
     "yourNetwork": "あなたのネットワーク",
     "emptyNetwork": {
-      "title": "ネットワークは空です",
-      "description": "知っている人を追加して、個人的なネットワークを構築し始めましょう。",
-      "action": "最初の人物を作成する"
+      "title": "はじめの一歩",
+      "description": "大切な人を追加して、あなたのネットワークに命を吹き込みましょう。",
+      "action": "最初の人を追加"
     },
     "today": "今日",
     "tomorrow": "明日",

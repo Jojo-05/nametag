@@ -596,13 +596,15 @@
   },
   "dashboard": {
     "title": "Panel",
-    "greeting": "Bienvenido de nuevo, {name}",
+    "greetingMorning": "Buenos días, {name}",
+    "greetingAfternoon": "Buenas tardes, {name}",
+    "greetingEvening": "Buenas noches, {name}",
     "upcomingEvents": "Próximos Eventos",
     "yourNetwork": "Tu Red",
     "emptyNetwork": {
-      "title": "Tu red está vacía",
-      "description": "Comienza a construir tu red personal agregando personas que conoces.",
-      "action": "Crea tu primera persona"
+      "title": "Todo empieza por algún lado",
+      "description": "Agrega a las personas que importan en tu vida y mira cómo tu red cobra vida.",
+      "action": "Agrega tu primera persona"
     },
     "today": "Hoy",
     "tomorrow": "Mañana",

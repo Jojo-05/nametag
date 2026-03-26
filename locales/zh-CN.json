@@ -596,13 +596,15 @@
   },
   "dashboard": {
     "title": "仪表盘",
-    "greeting": "欢迎回来，{name}",
+    "greetingMorning": "早上好，{name}",
+    "greetingAfternoon": "下午好，{name}",
+    "greetingEvening": "晚上好，{name}",
     "upcomingEvents": "即将发生的事件",
     "yourNetwork": "您的网络",
     "emptyNetwork": {
-      "title": "您的网络为空",
-      "description": "通过添加您认识的人来开始建立您的个人网络。",
-      "action": "创建您的第一个联系人"
+      "title": "每段旅程都有起点",
+      "description": "添加对你重要的人，看着你的人际网络变得生动起来。",
+      "action": "添加第一个人"
     },
     "today": "今天",
     "tomorrow": "明天",
