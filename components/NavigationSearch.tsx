@@ -172,7 +172,7 @@ export default function NavigationSearch() {
   };
 
   return (
-    <div ref={wrapperRef} className="relative w-48 lg:w-64">
+    <div ref={wrapperRef} className="relative w-full">
       <div className="relative">
         <input
           ref={inputRef}

@@ -16,6 +16,7 @@ import MarkdownRenderer from '@/components/MarkdownRenderer';
 import PersonAvatar from '@/components/PersonPhoto';
 import { getTranslations } from 'next-intl/server';
 import { getDateDisplayTitle } from '@/lib/important-date-types';
+import JournalSection from '@/components/JournalSection';
 
 function isSafeUrl(url: string): boolean {
   try {
@@ -102,6 +103,7 @@ export default async function PersonDetailsPage({
     select: {
       dateFormat: true,
       nameOrder: true,
+      language: true,
       name: true,
       surname: true,
       nickname: true,
@@ -111,7 +113,7 @@ export default async function PersonDetailsPage({
   const dateFormat = user?.dateFormat || 'MDY';
   const nameOrder = user?.nameOrder;
 
-  const [person, allPeople, relationshipTypes, cardDavConnection] = await Promise.all([
+  const [person, allPeople, relationshipTypes, cardDavConnection, latestJournalEntry] = await Promise.all([
     prisma.person.findUnique({
       where: {
         id,
@@ -217,6 +219,24 @@ export default async function PersonDetailsPage({
     prisma.cardDavConnection.findUnique({
       where: { userId: session.user.id },
       select: { id: true },
+    }),
+    prisma.journalEntry.findFirst({
+      where: {
+        userId: session.user.id,
+        deletedAt: null,
+        people: { some: { personId: id } },
+      },
+      include: {
+        people: {
+          where: { person: { deletedAt: null } },
+          include: {
+            person: {
+              select: { id: true, name: true, surname: true },
+            },
+          },
+        },
+      },
+      orderBy: [{ date: 'desc' }, { createdAt: 'desc' }],
     }),
   ]);
 
@@ -663,6 +683,17 @@ export default async function PersonDetailsPage({
                   <MarkdownRenderer content={person.notes} />
                 </div>
               )}
+
+              {/* Journal Section */}
+              <JournalSection
+                personId={person.id}
+                latestEntry={latestJournalEntry ? {
+                  ...latestJournalEntry,
+                  date: latestJournalEntry.date.toISOString(),
+                } : null}
+                nameOrder={nameOrder}
+                locale={user?.language || 'en'}
+              />
 
               {/* Relationship Network Section */}
               <div className="border border-border rounded-lg p-4">
