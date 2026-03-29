@@ -78,6 +78,20 @@ export default function JournalEntryForm({
   const [selectedPeople, setSelectedPeople] = useState<PillPerson[]>(resolveInitialSelected);
   const [updateLastContact, setUpdateLastContact] = useState(mode === 'create');
 
+  // Warn on unsaved changes
+  const isDirty = title !== (initialData?.title ?? '') ||
+    body !== (initialData?.body ?? '') ||
+    date !== (initialData?.date ?? getTodayString());
+
+  useEffect(() => {
+    if (!isDirty) return;
+    const handler = (e: BeforeUnloadEvent) => {
+      e.preventDefault();
+    };
+    window.addEventListener('beforeunload', handler);
+    return () => window.removeEventListener('beforeunload', handler);
+  }, [isDirty]);
+
   // Pre-populate person from ?person=id query param
   useEffect(() => {
     const personId = searchParams.get('person');
