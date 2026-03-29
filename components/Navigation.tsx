@@ -90,8 +90,8 @@ export default function Navigation({ userEmail, userName, userNickname, userPhot
             />
           </Link>
 
-          {/* Desktop search — centered, fills available space */}
-          <div className="hidden md:block flex-1 max-w-xl mx-auto">
+          {/* Desktop search — fills available space between logo and user menu */}
+          <div className="hidden md:block flex-1 max-w-xl">
             <NavigationSearch />
           </div>
 
