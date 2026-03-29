@@ -1673,7 +1673,7 @@
       "editButton": "編集",
       "deleteButton": "削除",
       "confirmDelete": "このジャーナルエントリーを削除してもよろしいですか？",
-      "confirmDeleteDescription": "この操作はゴミ箱から元に戻すことができます。",
+      "confirmDeleteDescription": "この操作は元に戻せません。",
       "deleted": "ジャーナルエントリーが削除されました",
       "taggedPeople": "人物"
     },

@@ -1673,7 +1673,7 @@
       "editButton": "Editar",
       "deleteButton": "Eliminar",
       "confirmDelete": "¿Estás seguro de que quieres eliminar esta entrada del diario?",
-      "confirmDeleteDescription": "Esta acción se puede deshacer desde la papelera.",
+      "confirmDeleteDescription": "Esta accion no se puede deshacer.",
       "deleted": "Entrada del diario eliminada",
       "taggedPeople": "Personas"
     },

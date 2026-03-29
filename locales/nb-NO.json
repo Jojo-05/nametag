@@ -1673,7 +1673,7 @@
       "editButton": "Rediger",
       "deleteButton": "Slett",
       "confirmDelete": "Er du sikker på at du vil slette denne journaloppføringen?",
-      "confirmDeleteDescription": "Denne handlingen kan angres fra papirkurven.",
+      "confirmDeleteDescription": "Denne handlingen kan ikke angres.",
       "deleted": "Journaloppføring slettet",
       "taggedPeople": "Personer"
     },

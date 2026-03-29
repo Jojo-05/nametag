@@ -1673,7 +1673,7 @@
       "editButton": "编辑",
       "deleteButton": "删除",
       "confirmDelete": "确定要删除这条日记记录吗？",
-      "confirmDeleteDescription": "此操作可从回收站撤销。",
+      "confirmDeleteDescription": "此操作无法撤销。",
       "deleted": "日记条目已删除",
       "taggedPeople": "人物"
     },
