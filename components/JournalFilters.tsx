@@ -22,7 +22,7 @@ interface JournalFiltersProps {
   people: PersonOption[];
   currentPersonIds: string[];
   currentSearch?: string;
-  nameOrder: string;
+  nameOrder: 'WESTERN' | 'EASTERN';
 }
 
 export default function JournalFilters({ people, currentPersonIds, currentSearch, nameOrder }: JournalFiltersProps) {
