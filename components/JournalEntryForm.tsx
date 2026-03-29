@@ -83,8 +83,11 @@ export default function JournalEntryForm({
     const personId = searchParams.get('person');
     if (!personId) return;
     const match = pillPeople.find((p) => p.id === personId);
-    if (match && !selectedPeople.some((p) => p.id === personId)) {
-      setSelectedPeople((prev) => [...prev, match]);
+    if (match) {
+      setSelectedPeople((prev) => {
+        if (prev.some((p) => p.id === personId)) return prev;
+        return [...prev, match];
+      });
     }
     // Only run on mount
     // eslint-disable-next-line react-hooks/exhaustive-deps
